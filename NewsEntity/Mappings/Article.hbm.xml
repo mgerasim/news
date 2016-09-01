@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="MoniTorEntity.Models" assembly="MoniTorEntity">
+  <class name="User" table="MoniTor_User">
+    <id name="ID" unsaved-value="0">
+      <column name="ID" not-null="true" />
+      <generator class="identity"/>
+    </id>
+    <property name="created_at" />
+    <property name="updated_at" />
+
+    
+    <property name="Content"  type="string" length="10000"/>
+
+  </class>
+</hibernate-mapping>
