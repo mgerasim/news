@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "Добавить новость";
+}
+
+<div class="cell auto-size padding20 bg-white" id="cell-content">
+    <h1 class="text-light">Добавить новость <span class="mif-file-text place-right"></span></h1>
+    <hr class="thin bg-grayLighter">    
+
+@using (Html.BeginForm("Create", "Article", null,
+    FormMethod.Post, new { @class = "form-horizontal" }))
+{ 
+    <script src="~/Scripts/ckeditor.js"></script>
+
+    <div class="input-control textarea">
+        <textarea name="Article_Content" id="Article_Content"></textarea>
+        <script>
+            CKEDITOR.replace("Article_Content",
+                {
+                    enterMode: CKEDITOR.ENTER_BR
+                });
+            </script>
+    </div>
+    
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default">Сохранить</button>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            @Html.ActionLink("Назад", "Index")
+        </div>
+    </div>
+    
+}
+        
+</div>|
+
+
+
+
