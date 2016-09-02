@@ -12,8 +12,8 @@ namespace News.Views
         // GET: /Article/
 
         public ActionResult Index()
-        {
-            return View();
+        {           
+            return View(NewsEntity.Models.Article.GetAll());
         }
 
         //

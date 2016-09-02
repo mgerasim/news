@@ -10,18 +10,19 @@
     @Scripts.Render("~/bundles/metro")
     
 </head>
-<body>
-    @Html.Partial("_Menu")
-
-    <div class="page-content">
-        <div class="flex-grid no-responsive-future" style="height: 100%;">
-            <div class="row" style="height: 100%">
-                @Html.Partial("_SliderBar")
-                @RenderBody()
+<body class="bg-steel">
+    <div class="app-bar fixed-top darcula" data-role="appbar">
+        @Html.Partial("_Menu")
+    </div>
+        <div class="page-content">
+            <div class="flex-grid no-responsive-future" style="height: 100%;">
+                <div class="row" style="height: 100%">
+                    @Html.Partial("_SliderBar")
+                    @RenderBody()
+                </div>
             </div>
         </div>
-    </div>
-    
+
     
     @RenderSection("scripts", required: false)
 </body>
