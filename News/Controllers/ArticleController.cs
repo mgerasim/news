@@ -1,4 +1,5 @@
-﻿using System;
+﻿using News.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,8 +12,10 @@ namespace News.Views
         //
         // GET: /Article/
 
-        public ActionResult Index()
-        {           
+        public ActionResult Index(string notice = "", string error = "")
+        {
+            ViewBag.Notice = notice;
+            ViewBag.Error = error;
             return View(NewsEntity.Models.Article.GetAll());
         }
 
@@ -29,7 +32,8 @@ namespace News.Views
 
         public ActionResult Create()
         {
-            return View();
+            ArticleNew model = new ArticleNew();
+            return View(model);
         }
 
         //
@@ -42,13 +46,21 @@ namespace News.Views
             try
             {
                 var model = new NewsEntity.Models.Article();
-                model.Content = collection.Get("Article_Content");
+                model.Content = collection.Get("Content");
+                model.Title = collection.Get("Title");
+                model.Source = collection.Get("Source");
                 model.Save();
                 return RedirectToAction("Index");
             }
-            catch
+            catch(Exception ex)
             {
-                return View();
+                string err = ex.Message;
+                if (ex.InnerException != null)
+                {
+                    err += ": " + ex.InnerException.Message;
+                }
+                return RedirectToAction("Index", "Article", new { error = err, notice = "" });
+
             }
         }
 

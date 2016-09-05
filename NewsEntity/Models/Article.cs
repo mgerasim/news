@@ -12,6 +12,8 @@ namespace NewsEntity.Models
         public virtual DateTime created_at { get; set; }
         public virtual DateTime updated_at { get; set; }
         public virtual string Content { get; set; }
+        public virtual string Source { get; set; }
+        public virtual string Title { get; set; }
 
         public Article()
         {

@@ -7,6 +7,22 @@
 <script src="~/Scripts/jquery.dataTables.min.js"></script>
 
 <div class="cell auto-size padding20 bg-white" id="cell-content">
+    @if (ViewBag.Notice != "")
+    {
+        <div class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Успешно!</strong> @ViewBag.Notice
+        </div>
+    }
+
+    @if (ViewBag.Error != "")
+    {
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Ошибка!</strong> @ViewBag.Error
+        </div>
+    }
+    
     <h1 class="text-light">Публикации <span class="mif-drive-eta place-right"></span></h1>
     <hr class="thin bg-grayLighter">    
     <table class="dataTable border bordered" data-role="datatable" data-auto-width="false">
@@ -14,6 +30,8 @@
             <tr>
                 <td style="width: 20px"></td>
                 <td class="sortable-column sort-asc" style="width: 100px">ID</td>
+                <td class="sortable-column">Заголовок</td>
+                <td class="sortable-column">Источник</td>
                 <td class="sortable-column">Содержимое</td>
                 @*<td class="sortable-column">Address</td>
                 <td class="sortable-column" style="width: 20px">Status</td>
@@ -32,6 +50,12 @@
                     </td>
                     <td>
                         @item.ID
+                    </td>
+                    <td>
+                        @item.Title
+                    </td>
+                    <td>
+                        @item.Source
                     </td>
                     <td>
                         @item.Content
