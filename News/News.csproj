@@ -127,10 +127,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MediaController.cs" />
     <Compile Include="Controllers\SchemaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\MediaNew.cs" />
     <Compile Include="Models\ArticleNew.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\ArticleController.cs" />
@@ -206,6 +208,7 @@
     <None Include="Properties\PublishProfiles\Release.pubxml" />
     <Content Include="Scripts\adapters\jquery.js" />
     <Content Include="Scripts\ckeditor.js" />
+    <Content Include="Scripts\clipboard.min.js" />
     <Content Include="Scripts\config.js" />
     <Content Include="Scripts\contents.css" />
     <Content Include="Scripts\jquery-2.1.4.js" />
@@ -480,6 +483,8 @@
     <Content Include="Scripts\plugins\wsc\README.md" />
     <Content Include="Scripts\skins\moono\readme.md" />
     <Content Include="Views\Article\Index.cshtml" />
+    <Content Include="Views\Media\Index.cshtml" />
+    <Content Include="Views\Media\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

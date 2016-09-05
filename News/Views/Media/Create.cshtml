@@ -1,0 +1,121 @@
+﻿@model News.Models.MediaNew
+@{
+    ViewBag.Title = "Добавить изображние";
+}
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+<script src="~/Scripts/jquery.dataTables.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        var clipboard = new Clipboard('.btn');
+    });
+</script>
+
+
+
+
+<div class="cell auto-size padding20 bg-white" id="cell-content">
+    <h1 class="text-light">Добавить изображение <span class="mif-file-text place-right"></span></h1>
+    <hr class="thin bg-grayLighter">
+        
+    @using (Html.BeginForm("Create", "Media", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+
+        <div class="grid">
+            <div class="row">
+                <div class="cell">
+                    <label class="block">Заголовок:</label>
+                    <div class="input-control text">
+                        @Html.EditorFor(model => model.Title)
+                        @Html.ValidationMessageFor(model => model.Title)
+                    </div>
+                </div>
+
+                <div class="cell">
+                    <label class="block">Источник:</label>
+                    <div class="input-control text">
+                        @Html.EditorFor(model => model.Source)
+                        @Html.ValidationMessageFor(model => model.Source)
+                    </div>
+                </div>
+
+                <div class="cell">
+                    <input type="file" name="file" />
+                </div>
+
+            </div>
+        
+            
+                            
+            <div class="row">
+                <button type="submit" class="button primary">Сохранить</button>
+            </div>
+
+            <div class="row">
+                @Html.ActionLink("Назад", "Index")
+            </div>
+
+        </div>
+
+
+    }
+
+    @Scripts.Render("~/Scripts/clipboard.min.js")
+
+    <table class="dataTable border bordered" data-role="datatable" data-auto-width="false">
+        <thead>
+            <tr>
+                <td class="sortable-column sort-asc" style="width: 100px">ID</td>
+                <td class="sortable-column">Заголовок</td>
+                <td class="sortable-column">Источник</td>
+                <td class="sortable-column">Наименование</td>
+                <td class="sortable-column">Изображение</td>
+                <td class="sortable-column">Ссылка</td>
+                <td class="sortable-column"></td>
+                
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in NewsEntity.Models.Media.GetAll())
+            {
+                <tr>
+                    <td>
+                        @item.ID
+                    </td>
+                    <td>
+                        @item.Title
+                    </td>
+                    <td>
+                        @item.Source
+                    </td>
+                    <td>
+                        @item.Name
+                    </td>
+                    <td>
+                        <img src="@Url.Content("~/Content/Media/")@item.Name" />
+                    </td>
+                    <td>
+                        @Html.ActionLink("Имя: " + item.Name, "Media/" + @item.Name, "Content")                       
+                    </td>
+
+                    <td>
+                        <button class="btn button primary" data-clipboard-text="http://meteo-dv.ru@(Url.Content("~/Content/Media/"))@item.Name">
+                            Копировать
+                        </button>
+                        
+
+                    </td>
+                </tr>
+            }
+           
+        </tbody>
+    </table>
+
+</div>
+
+
+
+

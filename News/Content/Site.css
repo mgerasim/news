@@ -23,3 +23,7 @@
                 flex-basis: calc(100% - 52px);
             }
         }
+
+        .dataTable tbody tr td img {
+            width: 10%;
+        }
