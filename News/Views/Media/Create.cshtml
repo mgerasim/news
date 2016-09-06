@@ -95,10 +95,26 @@
                         @item.Name
                     </td>
                     <td>
-                        <img src="@Url.Content("~/Content/Media/")@item.Name" />
+                        @if (item.Name == "" || item.Name == null)
+                        {
+                            <img src="@item.Source" />                            
+                        }
+                        else
+                        {
+                            <img src="@Url.Content("~/Content/Media/")@item.Name" />    
+                        }
+                        
                     </td>
                     <td>
-                        @Html.ActionLink("Имя: " + item.Name, "Media/" + @item.Name, "Content")                       
+                        @if (item.Name == "" || item.Name == null)
+                        {
+                            <a href="@item.Source" target="_blank"> @item.Source </a>
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Имя: " + item.Name, "Media/" + @item.Name, "Content", null, new { target = "_blank" })                           
+                        }
+                        
                     </td>
 
                     <td>

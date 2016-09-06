@@ -9,8 +9,8 @@
     <property name="updated_at" />
 
     
-    <property name="Name"  not-null="true" type="string" length="200"/>
-    <property name="Source" not-null="true" type="string" length="200"/>
+    <property name="Name"   type="string" length="200"/>
+    <property name="Source"  type="string" length="200"/>
     <property name="Title" not-null="true" type="string" length="200"/>
 
   </class>

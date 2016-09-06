@@ -41,8 +41,14 @@ namespace News.Controllers
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
+            var model = new NewsEntity.Models.Media();
             try
-            {
+            {   
+                model.Title = collection.Get("Title");
+                model.Source = collection.Get("Source");
+                model.Save();
+
+
                 // TODO: Add insert logic here
                 if (Request.Files.Count > 0)
                 {
@@ -51,20 +57,18 @@ namespace News.Controllers
 
                     if (file != null && file.ContentLength > 0)
                     {
-                        fileName = Path.GetFileName(file.FileName);
+                        fileName = Path.GetFileName(model.ID.ToString("000000000") + file.FileName);
                         if (!Directory.Exists(Server.MapPath("~/Content/Media/")))
                         {
                             Directory.CreateDirectory(Server.MapPath("~/Content/Media/"));
                         }
                         var path = Path.Combine(Server.MapPath("~/Content/Media/"), fileName);
                         file.SaveAs(path);
-                    }
 
-                    var model = new NewsEntity.Models.Media();
-                    model.Name = fileName;
-                    model.Title = collection.Get("Title");
-                    model.Source = collection.Get("Title");
-                    model.Save();
+                        model.Name = fileName;
+                        model.Update();
+                    }
+                    
                 }
 
                 return RedirectToAction("Create");
@@ -75,6 +79,14 @@ namespace News.Controllers
                 if (ex.InnerException != null)
                 {
                     err += ": " + ex.InnerException.Message;
+                }
+                if (model.ID > 0)
+                {
+                    try
+                    {
+                        model.Delete();
+                    }
+                    catch { }
                 }
                 return RedirectToAction("Index", "Article", new { error = err, notice = "" });
 

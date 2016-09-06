@@ -13,14 +13,10 @@ namespace News.Models
         [Required]
         [Editable(true)]
         public virtual string Title { get; set; }
-        [Display(Name = "Источник")]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
-        [Required]
+        [Display(Name = "Источник")]        
         [Editable(true)]
         public virtual string Source { get; set; }
-        [Display(Name = "Наименование")]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
-        [Required]
+        [Display(Name = "Наименование")]        
         [Editable(true)]
         public virtual string Name { get; set; }
         public HttpPostedFileBase attachment { get; set; }
