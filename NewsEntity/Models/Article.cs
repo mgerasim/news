@@ -55,5 +55,10 @@ namespace NewsEntity.Models
             Common.IRepository<Article> repo = new Repositories.ArticleRepository();
             return repo.GetById(ID);
         }
+        public static Article GetBySource(string Source)
+        {
+            NewsEntity.Repositories.ArticleRepository repo = new Repositories.ArticleRepository();
+            return repo.GetBySource(Source);
+        }
     }
 }

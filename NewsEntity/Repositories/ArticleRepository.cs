@@ -55,6 +55,12 @@ namespace NewsEntity.Repositories
                 return session.CreateCriteria<Article>().Add(Restrictions.Eq("ID", id)).UniqueResult<Article>();
         }
 
+        public Article GetBySource(string Source)
+        {
+            using (ISession session = NHibernateHelper.OpenSession())
+                return session.CreateCriteria<Article>().Add(Restrictions.Eq("Source", Source)).UniqueResult<Article>();
+        }
+
         List<Article> IRepository<Models.Article>.GetAll()
         {
             using (ISession session = NHibernateHelper.OpenSession())

@@ -1,4 +1,5 @@
 ﻿using NewsCore;
+using NewsCore.Grabber;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +12,16 @@ namespace NewsConsole
     {
         static void Main(string[] args)
         {
-            SupportLogger();
+          //  SupportLogger();
+            SupportGrabber();
             Console.ReadKey();
         }
-
+        static void SupportGrabber()
+        {
+            ILogger theLogger = new LoggerConsole();
+            IGrabber theGrabber = new GrabberPrimpogoda(theLogger);
+            theGrabber.Run();
+        }
         static void SupportLogger()
         {
             ILogger theLogger = new LoggerNLog();

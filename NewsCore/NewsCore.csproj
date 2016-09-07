@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>..\packages\HtmlAgilityPack.1.4.9.5\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
     <Reference Include="NLog">
       <HintPath>..\packages\NLog.4.3.8\lib\net45\NLog.dll</HintPath>
     </Reference>
@@ -42,6 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Grabber\GrabberPrimpogoda.cs" />
+    <Compile Include="Grabber\IGrabber.cs" />
     <Compile Include="Logger\LoggerConsole.cs" />
     <Compile Include="Logger\ILogger.cs" />
     <Compile Include="Logger\LoggerNLog.cs" />
@@ -52,6 +57,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NewsEntity\NewsEntity.csproj">
+      <Project>{ce60aa38-5fe4-4710-80cf-86feb6e7517e}</Project>
+      <Name>NewsEntity</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
