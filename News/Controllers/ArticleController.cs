@@ -95,7 +95,25 @@ namespace News.Views
 
         public ActionResult Delete(int id)
         {
-            return View();
+            try
+            {
+                var model = NewsEntity.Models.Article.GetById(id);
+                if (model != null)
+                {
+                    model.Delete();
+                }
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                string err = ex.Message;
+                if (ex.InnerException != null)
+                {
+                    err += ": " + ex.InnerException.Message;
+                }
+                return RedirectToAction("Index", "Article", new { error = err, notice = "" });
+
+            }
         }
 
         //

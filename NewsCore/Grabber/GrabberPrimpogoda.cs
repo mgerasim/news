@@ -24,7 +24,7 @@ namespace NewsCore.Grabber
             this.theLogger = theLogger;
         }
 
-        private void GrabberNews(string urlNews) 
+        private void GrabberNews(string urlNews, string urlImage) 
         {
             try
             {
@@ -68,6 +68,13 @@ namespace NewsCore.Grabber
                     tagNewsDetail.RemoveChild(tagNewsDetail.FirstChild);
 
                     Log(tagNewsDetail.InnerHtml);
+
+                    var tagImgNewsPhoto = tagNewsDetail.SelectSingleNode("//img[@class='news_photo']");
+                    if (tagImgNewsPhoto == null)
+                    {
+                        throw new Exception("Не обнаружен тег img с классом news-photo");
+                    }
+                    tagImgNewsPhoto.Attributes["src"].Value = urlImage;
 
                     if (NewsEntity.Models.Article.GetBySource(urlAddress) == null)
                     {
@@ -150,15 +157,25 @@ namespace NewsCore.Grabber
                         {
                             throw new Exception("Не обнаружен тег div class=thumb");
                         }                       
+                        
                         var tagA = tagDivThumb.FirstChild;
                         if (tagA == null)
                         {
                             throw new Exception("Не обнаружен тег a class=th");
                         }
 
+                        tagA.RemoveChild(tagA.FirstChild);
+                        var tagImg = tagA.FirstChild;
+                        if (tagImg == null)
+                        {
+                            throw new Exception("Не обнаружен тег img");
+                        }
+                        string urlImage = "http://primpogoda.ru" + tagImg.Attributes["src"].Value;
+
+
                         string urlNews = tagA.Attributes["href"].Value;
                         Log(urlNews);
-                        this.GrabberNews(urlNews);
+                        this.GrabberNews(urlNews, urlImage);
                     }
                     
 

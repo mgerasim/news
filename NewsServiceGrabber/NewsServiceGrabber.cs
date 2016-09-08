@@ -1,4 +1,5 @@
 ﻿using NewsCore;
+using NewsCore.Grabber;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -32,13 +33,17 @@ namespace NewsServiceGrabber
 
         private void timer1_Tick_1(object sender, EventArgs e)
         {
+            ILogger theLogger = new LoggerNLog();
             try
             {
-                ILogger theLogger = new LoggerNLog();
                 theLogger.Log("NewsServiceGrabber: TimerTick");
+                IGrabber theGrabber = new GrabberPrimpogoda(theLogger);
+                theGrabber.Run();
             }
             catch (Exception ex)
             {
+                theLogger.Log(ex.Message);
+                theLogger.Log(ex.StackTrace);
             }
         }
     }

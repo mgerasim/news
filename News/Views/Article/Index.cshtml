@@ -1,6 +1,6 @@
 ﻿@model List<NewsEntity.Models.Article>
 @{
-    ViewBag.Title = "Все новости";
+    ViewBag.Title = "Публикации";
 }
 
 
@@ -33,6 +33,7 @@
                 <td class="sortable-column">Заголовок</td>
                 <td class="sortable-column">Источник</td>
                 <td class="sortable-column">Содержимое</td>
+                <td></td>
                 @*<td class="sortable-column">Address</td>
                 <td class="sortable-column" style="width: 20px">Status</td>
                 <td style="width: 20px">Switch</td>*@
@@ -59,6 +60,9 @@
                     </td>
                     <td>
                         @Html.Raw( @item.Content )
+                    </td>
+                    <td>
+                        @Html.ActionLink("Удалить", "Delete", new { id = item.ID })
                     </td>
                 </tr>
             }

@@ -32,7 +32,7 @@
             components = new System.ComponentModel.Container();
             this.ServiceName = "NewsServiceGrabber";
             this.timer1 = new System.Timers.Timer();
-            this.timer1.Interval = 1000 * 60 * 1;            // 1 мин
+            this.timer1.Interval = 1000 * 60 * 1 * 60;            // 1 час
             this.timer1.Start();
             this.timer1.Elapsed += new System.Timers.ElapsedEventHandler(this.timer1_Tick_1);
         }
