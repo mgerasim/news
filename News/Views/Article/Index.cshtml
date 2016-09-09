@@ -32,11 +32,12 @@
                 <td class="sortable-column sort-asc" style="width: 100px">ID</td>
                 <td class="sortable-column">Заголовок</td>
                 <td class="sortable-column">Источник</td>
-                <td class="sortable-column">Содержимое</td>
+                <td class="sortable-column">Адрес</td>
+                <td class="sortable-column">Дата публикации</td>
+                <td class="sortable-column">Анонс</td>
                 <td></td>
-                @*<td class="sortable-column">Address</td>
-                <td class="sortable-column" style="width: 20px">Status</td>
-                <td style="width: 20px">Switch</td>*@
+                <td></td>
+                <td></td>
             </tr>
         </thead>
         <tbody>
@@ -55,11 +56,26 @@
                     <td>
                         @item.Title
                     </td>
+
                     <td>
-                        @item.Source
+                        @item.Source_Site
+                    </td>
+
+                    <td>
+                        @item.Source_Url
                     </td>
                     <td>
-                        @Html.Raw( @item.Content )
+                        @item.Source_Published_At.ToShortDateString()
+                    </td>
+
+                    <td>
+                        @Html.Raw( @item.Anons )
+                    </td>
+                    <td>
+                        @Html.ActionLink("Редактировать", "Edit", new { id = item.ID })
+                    </td>
+                    <td>
+                        @Html.ActionLink("Просмотр", "Show", new { id = item.ID })
                     </td>
                     <td>
                         @Html.ActionLink("Удалить", "Delete", new { id = item.ID })

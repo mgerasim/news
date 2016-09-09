@@ -13,11 +13,11 @@ namespace News.Models
         [Required]
         [Editable(true)]
         public virtual string Title { get; set; }
-        [Display(Name = "Источник")]
+        [Display(Name = "Анонс")]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [Required]
         [Editable(true)]
-        public virtual string Source { get; set; }
+        public virtual string Anons { get; set; }
         [Display(Name = "Содержимое")]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [Required]

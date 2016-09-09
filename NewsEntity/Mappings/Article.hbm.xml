@@ -10,8 +10,11 @@
 
     
     <property name="Content"  not-null="true" type="string" length="10000"/>
-    <property name="Source" not-null="true" type="string" length="200"/>
+    <property name="Source_Url" not-null="true" type="string" length="200"/>
+    <property name="Source_Site" not-null="true" type="string" length="200"/>
+    <property name="Source_Published_At" not-null="true" />
     <property name="Title" not-null="true" type="string" length="200"/>
+    <property name="Anons"  not-null="true" type="string" length="10000"/>
 
   </class>
 </hibernate-mapping>

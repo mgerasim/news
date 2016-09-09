@@ -1,0 +1,22 @@
+﻿@model NewsEntity.Models.Article
+@{
+    ViewBag.Title = "Просмотр публикации";
+}
+
+
+<div class="cell auto-size padding20 bg-white" id="cell-content">
+    <h1 class="text-light">Просмотр публикации <span class="mif-file-text place-right"></span></h1>
+    <hr class="thin bg-grayLighter">
+
+    <h1>@Model.Title</h1>
+    <p>
+        @Html.Raw(@Model.Anons)
+    </p>
+    <p>
+        @Html.Raw(@Model.Content)
+    </p>
+
+
+</div>
+
+

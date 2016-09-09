@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HtmlAgilityPack;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -24,11 +25,12 @@ namespace NewsCore.Grabber
             this.theLogger = theLogger;
         }
 
-        private void GrabberNews(string urlNews, string urlImage) 
+        private void GrabberNews(string urlNews, string urlImage, string newsAnons) 
         {
             try
             {
-                string urlAddress = "http://primpogoda.ru" + urlNews;
+                string urlSite = "http://primpogoda.ru";
+                string urlAddress = urlSite + urlNews;
 
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(urlAddress);
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
@@ -48,8 +50,6 @@ namespace NewsCore.Grabber
                     }
 
                     string data = readStream.ReadToEnd();
-                    Log("GrabberNews: readStream:\n " + data);
-
 
                     response.Close();
                     readStream.Close();
@@ -70,18 +70,29 @@ namespace NewsCore.Grabber
                     Log(tagNewsDetail.InnerHtml);
 
                     var tagImgNewsPhoto = tagNewsDetail.SelectSingleNode("//img[@class='news_photo']");
-                    if (tagImgNewsPhoto == null)
+                    if (tagImgNewsPhoto != null)
                     {
-                        throw new Exception("Не обнаружен тег img с классом news-photo");
+                        tagImgNewsPhoto.Attributes["src"].Value = urlImage;    
                     }
-                    tagImgNewsPhoto.Attributes["src"].Value = urlImage;
+                    
+
+                    var tagH6Date = tagNewsDetail.SelectSingleNode("//h6[@class='date']");
+                    if (tagH6Date == null)
+                    {
+                        throw new Exception("Не обнаружен тег h6 с классом date");
+                    }
+                    string strDate = tagH6Date.InnerText;
+                    DateTime dt = DateTime.ParseExact(strDate, "dd.MM.yyyy HH:mm", System.Globalization.CultureInfo.InvariantCulture);
 
                     if (NewsEntity.Models.Article.GetBySource(urlAddress) == null)
                     {
                         NewsEntity.Models.Article theArticle = new NewsEntity.Models.Article();
-                        theArticle.Source = urlAddress;
+                        theArticle.Source_Url = urlAddress;
+                        theArticle.Source_Site = urlSite;
+                        theArticle.Source_Published_At = dt;
                         theArticle.Content = tagNewsDetail.InnerHtml;
                         theArticle.Title = tagNewsDetail.FirstChild.InnerText;
+                        theArticle.Anons = newsAnons;
                         theArticle.Save();
                     }                   
 
@@ -127,8 +138,6 @@ namespace NewsCore.Grabber
                     }
 
                     string data = readStream.ReadToEnd();
-                    Log("GrabberPrimpogoda: readStream:\n " + data);
-
 
                     response.Close();
                     readStream.Close();
@@ -171,11 +180,18 @@ namespace NewsCore.Grabber
                             throw new Exception("Не обнаружен тег img");
                         }
                         string urlImage = "http://primpogoda.ru" + tagImg.Attributes["src"].Value;
-
-
+                        
                         string urlNews = tagA.Attributes["href"].Value;
+
+                        var tagDivAnons = item.SelectSingleNode("//div[@class='anons']");
+                        if (tagDivAnons == null)
+                        {
+                            throw new Exception("Не обнаружен тег div с классом anons");
+                        }
+                        string newsAnons = tagDivAnons.InnerText;
+
                         Log(urlNews);
-                        this.GrabberNews(urlNews, urlImage);
+                        this.GrabberNews(urlNews, urlImage, newsAnons);
                     }
                     
 

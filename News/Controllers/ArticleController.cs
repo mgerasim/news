@@ -20,11 +20,12 @@ namespace News.Views
         }
 
         //
-        // GET: /Article/Details/5
+        // GET: /Article/Show/5
 
-        public ActionResult Details(int id)
+        public ActionResult Show(int id)
         {
-            return View();
+            var model = NewsEntity.Models.Article.GetById(id);
+            return View(model);
         }
 
         //
@@ -48,7 +49,10 @@ namespace News.Views
                 var model = new NewsEntity.Models.Article();
                 model.Content = collection.Get("Content");
                 model.Title = collection.Get("Title");
-                model.Source = collection.Get("Source");
+                model.Anons = collection.Get("Anons");
+                model.Source_Url = "http://meteo-dv.ru";
+                model.Source_Site = "http://meteo-dv.ru";
+                model.Source_Published_At = DateTime.Now;
                 model.Save();
                 return RedirectToAction("Index");
             }
@@ -69,24 +73,35 @@ namespace News.Views
 
         public ActionResult Edit(int id)
         {
-            return View();
+            var model = NewsEntity.Models.Article.GetById(id);
+            return View(model);
         }
 
         //
         // POST: /Article/Edit/5
 
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult Edit(int id, FormCollection collection)
         {
             try
             {
-                // TODO: Add update logic here
-
+                var model = NewsEntity.Models.Article.GetById(id);
+                model.Content = collection.Get("Content");
+                model.Title = collection.Get("Title");
+                model.Anons = collection.Get("Anons");             
+                model.Update();
                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                string err = ex.Message;
+                if (ex.InnerException != null)
+                {
+                    err += ": " + ex.InnerException.Message;
+                }
+                return RedirectToAction("Index", "Article", new { error = err, notice = "" });
+
             }
         }
 
@@ -133,5 +148,6 @@ namespace News.Views
                 return View();
             }
         }
+
     }
 }

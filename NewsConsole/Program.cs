@@ -12,6 +12,7 @@ namespace NewsConsole
     {
         static void Main(string[] args)
         {
+            SupportUpdateSchema();
           //  SupportLogger();
             SupportGrabber();
             Console.ReadKey();
@@ -26,6 +27,11 @@ namespace NewsConsole
         {
             ILogger theLogger = new LoggerNLog();
             theLogger.Log("NewsConsole: SupportLogger");
+        }
+
+        static void SupportUpdateSchema()
+        {
+            NewsEntity.Common.NHibernateHelper.UpdateSchema();
         }
 
     }

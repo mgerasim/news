@@ -52,6 +52,10 @@
       <Project>{e79ca7ef-a986-4f0a-9a5b-e3fb8b3e2bde}</Project>
       <Name>NewsCore</Name>
     </ProjectReference>
+    <ProjectReference Include="..\NewsEntity\NewsEntity.csproj">
+      <Project>{ce60aa38-5fe4-4710-80cf-86feb6e7517e}</Project>
+      <Name>NewsEntity</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
