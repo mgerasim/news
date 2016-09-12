@@ -28,5 +28,17 @@ namespace News.Controllers
             }
             return Json(theResult, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult NewsPublished()
+        {
+            List<NewsEntity.Models.Article> theList = (List<NewsEntity.Models.Article>)NewsEntity.Models.Article.GetPublished();
+            List<JsonNews> theResult = new List<JsonNews>();
+            foreach (var item in theList)
+            {
+                JsonNews jsonObj = new JsonNews(item);
+                theResult.Add(jsonObj);
+            }
+            return Json(theResult, JsonRequestBehavior.AllowGet);
+        }
     }
 }

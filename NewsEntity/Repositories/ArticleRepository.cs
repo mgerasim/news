@@ -60,6 +60,16 @@ namespace NewsEntity.Repositories
             using (ISession session = NHibernateHelper.OpenSession())
                 return session.CreateCriteria<Article>().Add(Restrictions.Eq("Source_Url", Source)).UniqueResult<Article>();
         }
+        public List<Article> GetPublished()
+        {
+            using (ISession session = NHibernateHelper.OpenSession())
+            {
+                ICriteria criteria = session.CreateCriteria(typeof(Article));
+                criteria.AddOrder(Order.Desc("ID"));
+                criteria.Add(Restrictions.IsNotNull("Published_At"));
+                return criteria.List<Article>().ToList<Article>();
+            }
+        }
 
         List<Article> IRepository<Models.Article>.GetAll()
         {

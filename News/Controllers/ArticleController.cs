@@ -19,6 +19,26 @@ namespace News.Views
             return View(NewsEntity.Models.Article.GetAll());
         }
 
+        public ActionResult Publish(int id)
+        {
+            try
+            {
+                var model = NewsEntity.Models.Article.GetById(id);
+                model.Published_At = DateTime.Now;
+                model.Save();
+                return RedirectToAction("Index", "Article");
+            }
+            catch (Exception ex)
+            {
+                string err = ex.Message;
+                if (ex.InnerException != null)
+                {
+                    err += ": " + ex.InnerException.Message;
+                }
+                return RedirectToAction("Index", "Article", new { error = err, notice = "" });
+            }
+        }
+
         //
         // GET: /Article/Show/5
 

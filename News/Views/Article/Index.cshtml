@@ -33,8 +33,10 @@
                 <td class="sortable-column">Заголовок</td>
                 <td class="sortable-column">Источник</td>
                 <td class="sortable-column">Адрес</td>
-                <td class="sortable-column">Дата публикации</td>
+                <td class="sortable-column">Дата публикации на источнике</td>
+                <td class="sortable-column">Дата публикации MeteoDV</td>
                 <td class="sortable-column">Анонс</td>
+                <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -69,7 +71,14 @@
                     </td>
 
                     <td>
+                        @item.Published_At.ToShortDateString()
+                    </td>
+
+                    <td>
                         @Html.Raw( @item.Anons )
+                    </td>
+                    <td>
+                        @Html.ActionLink("Опубликовать", "Publish", new { id = item.ID })
                     </td>
                     <td>
                         @Html.ActionLink("Редактировать", "Edit", new { id = item.ID })

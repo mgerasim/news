@@ -17,7 +17,7 @@ namespace NewsEntity.Models
         public virtual string Source_Site { get; set; }
         public virtual DateTime Source_Published_At { get; set; }
         public virtual string Title { get; set; }
-
+        public virtual DateTime Published_At { get; set; }
         public Article()
         {
 
@@ -62,6 +62,11 @@ namespace NewsEntity.Models
         {
             NewsEntity.Repositories.ArticleRepository repo = new Repositories.ArticleRepository();
             return repo.GetBySource(Source);
+        }
+        public static List<Article> GetPublished()
+        {
+            NewsEntity.Repositories.ArticleRepository repo = new Repositories.ArticleRepository();
+            return repo.GetPublished();
         }
     }
 }
