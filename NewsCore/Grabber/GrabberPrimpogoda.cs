@@ -193,8 +193,6 @@ namespace NewsCore.Grabber
                         Log(urlNews);
                         this.GrabberNews(urlNews, urlImage, newsAnons);
                     }
-                    
-
                 }
             }
             catch (Exception ex)

@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Grabber\GrabberPrimpogoda.cs" />
+    <Compile Include="Grabber\GrabberPrimpogodaWeatherNow.cs" />
     <Compile Include="Grabber\IGrabber.cs" />
     <Compile Include="Logger\LoggerConsole.cs" />
     <Compile Include="Logger\ILogger.cs" />

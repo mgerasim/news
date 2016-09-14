@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="NewsEntity.Models" assembly="NewsEntity">
+  <class name="City" table="News_City">
+    <id name="ID" unsaved-value="0">
+      <column name="ID" not-null="true" />
+      <generator class="identity"/>
+    </id>
+    <property name="created_at" />
+    <property name="updated_at" />
+
+    
+    <property name="Name"  not-null="true" type="string" length="200"/>
+    <property name="Url_Primpogoda_Weather_Now" type="string" length="200"/>
+    <property name="Url_Primpogoda_Weather_Today" type="string" length="200"/>
+    
+  </class>
+</hibernate-mapping>

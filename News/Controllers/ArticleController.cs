@@ -1,7 +1,10 @@
 ﻿using News.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
@@ -28,6 +31,61 @@ namespace News.Views
                 model.Save();
                 return RedirectToAction("Index", "Article");
             }
+            catch (Exception ex)
+            {
+                string err = ex.Message;
+                if (ex.InnerException != null)
+                {
+                    err += ": " + ex.InnerException.Message;
+                }
+                return RedirectToAction("Index", "Article", new { error = err, notice = "" });
+            }
+        }
+        public ActionResult PublishToKhabmeteo(int id)
+        {
+            try
+            {
+                var model = NewsEntity.Models.Article.GetById(id);
+
+                var request = (HttpWebRequest)WebRequest.Create("http://khabmeteo.ru/cgi-bin/auth/addnews.cgi?news=transfer");
+
+                var postData = "heading=" + model.Title;
+                postData += "&addnews=" + model.Anons;
+
+                string str = postData;
+                Encoding srcEncodingFormat = Encoding.UTF8;
+                Encoding dstEncodingFormat = Encoding.GetEncoding("windows-1251");
+                byte[] originalByteString = srcEncodingFormat.GetBytes(str);
+                byte[] convertedByteString = Encoding.Convert(srcEncodingFormat,
+                dstEncodingFormat, originalByteString);
+                string finalString = dstEncodingFormat.GetString(convertedByteString);
+                                
+                var data = convertedByteString;
+                
+                request.Method = "POST";
+                request.ContentType = "application/x-www-form-urlencoded";
+                request.ContentLength = data.Length;
+                
+                // authentication
+                var cache = new CredentialCache();
+                Uri uri = new Uri("http://khabmeteo.ru/cgi-bin/auth");
+                cache.Add(uri, "Basic", new NetworkCredential("khabmeteo", "mqnihq8j"));
+                request.Credentials = cache;
+
+
+                using (var stream = request.GetRequestStream())
+                {
+                    stream.Write(data, 0, data.Length);
+                }
+
+                var response = (HttpWebResponse)request.GetResponse();
+
+                var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
+
+                string notice = "Публикация " + model.Title + " успешна размещена на khabmeteo.ru";
+                return RedirectToAction("Index", "Article", new { error = "", notice = notice });
+            }
+            
             catch (Exception ex)
             {
                 string err = ex.Message;
@@ -73,8 +131,10 @@ namespace News.Views
                 model.Source_Url = "http://meteo-dv.ru";
                 model.Source_Site = "http://meteo-dv.ru";
                 model.Source_Published_At = DateTime.Now;
+                model.Published_At = null;
                 model.Save();
-                return RedirectToAction("Index");
+                string notice = "Публикация " + model.Title + " успешна создана";
+                return RedirectToAction("Index", new { error = "", notice = notice });
             }
             catch(Exception ex)
             {

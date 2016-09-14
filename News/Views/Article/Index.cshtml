@@ -40,6 +40,7 @@
                 <td></td>
                 <td></td>
                 <td></td>
+                <td></td>
             </tr>
         </thead>
         <tbody>
@@ -71,7 +72,9 @@
                     </td>
 
                     <td>
-                        @item.Published_At.ToShortDateString()
+                        @if (@item.Published_At != null) {
+                            @item.Published_At.Value
+                        }                        
                     </td>
 
                     <td>
@@ -79,6 +82,9 @@
                     </td>
                     <td>
                         @Html.ActionLink("Опубликовать", "Publish", new { id = item.ID })
+                    </td>
+                    <td>
+                        @Html.ActionLink("Опубликовать на khabmeteo.ru", "PublishToKhabmeteo", new { id = item.ID })
                     </td>
                     <td>
                         @Html.ActionLink("Редактировать", "Edit", new { id = item.ID })
