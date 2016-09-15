@@ -36,6 +36,7 @@
                 <td class="sortable-column">Дата публикации на источнике</td>
                 <td class="sortable-column">Дата публикации MeteoDV</td>
                 <td class="sortable-column">Анонс</td>
+                <td class="sortable-column">Категория</td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -68,13 +69,20 @@
                         @item.Source_Url
                     </td>
                     <td>
-                        @item.Source_Published_At.ToShortDateString()
+                        @if (@item.Source_Published_At != null)
+                        {
+                            @item.Source_Published_At.Value.ToShortDateString()
+                        }   
                     </td>
 
                     <td>
                         @if (@item.Published_At != null) {
-                            @item.Published_At.Value
-                        }                        
+                            @item.Published_At.Value.ToShortDateString()
+                        }
+                    </td>
+
+                    <td>
+                        @NewsEntity.Models.Article.CategoryList.Single(x=>x.ID == @item.Category).Name
                     </td>
 
                     <td>

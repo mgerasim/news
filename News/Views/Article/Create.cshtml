@@ -45,8 +45,7 @@
                 @Html.ValidationMessageFor(model => model.Anons)
             </div>
         </div>
-
-
+        
         <div class="row">
             <div class="offset10">
                 <label class="block">Проверить орфографию:</label>
@@ -70,6 +69,19 @@
                     </script>
                 </div>
                 @Html.ValidationMessageFor(model => model.Content)
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="offset10">
+                <label class="block">Категория:</label>
+
+                <select name="Category">
+                    @foreach (var category in NewsEntity.Models.Article.CategoryList)
+                    {
+                        <option value="@category.ID">@category.Name</option>
+                    }
+                </select>
             </div>
         </div>
 

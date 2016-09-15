@@ -14,11 +14,12 @@ namespace News.Views
     {
         //
         // GET: /Article/
-
+        [ValidateInput(false)]
         public ActionResult Index(string notice = "", string error = "")
         {
             ViewBag.Notice = notice;
             ViewBag.Error = error;
+
             return View(NewsEntity.Models.Article.GetAll());
         }
 
@@ -28,7 +29,7 @@ namespace News.Views
             {
                 var model = NewsEntity.Models.Article.GetById(id);
                 model.Published_At = DateTime.Now;
-                model.Save();
+                model.Update();
                 return RedirectToAction("Index", "Article");
             }
             catch (Exception ex)
@@ -127,11 +128,10 @@ namespace News.Views
                 var model = new NewsEntity.Models.Article();
                 model.Content = collection.Get("Content");
                 model.Title = collection.Get("Title");
-                model.Anons = collection.Get("Anons");
-                model.Source_Url = "http://meteo-dv.ru";
-                model.Source_Site = "http://meteo-dv.ru";
-                model.Source_Published_At = DateTime.Now;
+                model.Anons = collection.Get("Anons");                
                 model.Published_At = null;
+                model.Source_Url = Guid.NewGuid().ToString();
+                model.Category = Convert.ToInt32(collection.Get("Category"));
                 model.Save();
                 string notice = "Публикация " + model.Title + " успешна создана";
                 return RedirectToAction("Index", new { error = "", notice = notice });
@@ -169,7 +169,8 @@ namespace News.Views
                 var model = NewsEntity.Models.Article.GetById(id);
                 model.Content = collection.Get("Content");
                 model.Title = collection.Get("Title");
-                model.Anons = collection.Get("Anons");             
+                model.Anons = collection.Get("Anons");
+                model.Category = Convert.ToInt32(collection.Get("Category"));
                 model.Update();
                 return RedirectToAction("Index");
             }

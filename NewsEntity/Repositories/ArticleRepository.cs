@@ -71,6 +71,18 @@ namespace NewsEntity.Repositories
             }
         }
 
+        public List<Article> GetByCategory(int Category)
+        {
+            using (ISession session = NHibernateHelper.OpenSession())
+            {
+                ICriteria criteria = session.CreateCriteria(typeof(Article));
+                criteria.AddOrder(Order.Desc("ID"));
+                criteria.Add(Restrictions.IsNotNull("Published_At"));
+                criteria.Add(Restrictions.Eq("Category", Category));
+                return criteria.List<Article>().ToList<Article>();
+            }
+        }
+
         List<Article> IRepository<Models.Article>.GetAll()
         {
             using (ISession session = NHibernateHelper.OpenSession())

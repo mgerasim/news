@@ -15,8 +15,15 @@ namespace NewsConsole
             SupportUpdateSchema();
           //  SupportLogger();
             //SupportGrabber();
-            SupportGrabberPrimpogodaWeatherNow();
+            //SupportGrabberPrimpogodaWeatherNow();
+            SupportGrabberPrimpogodaLenta();
             Console.ReadKey();
+        }
+        static void SupportGrabberPrimpogodaLenta()
+        {
+            ILogger theLogger = new LoggerConsole();
+            IGrabber theGrabber = new GrabberPrimpogodaLenta(theLogger);
+            theGrabber.Run();
         }
         static void SupportGrabberPrimpogodaWeatherNow()
         {

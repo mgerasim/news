@@ -14,8 +14,23 @@ namespace News.Controllers
 
         public ActionResult Index()
         {
-            var theNewsList = NewsEntity.Models.Article.GetPublished();
-            return View(theNewsList);
+            try
+            {
+                var theView = new Models.NewsMain();
+
+                return View(theView);
+            }
+            catch (Exception ex)
+            {
+                string err = ex.Message;
+                if (ex.InnerException != null)
+                {
+                    err += ": " + ex.InnerException.Message;
+                }
+                var theView = new Models.NewsMain(false);
+                theView.Error = err;
+                return View(theView);
+            }
         }
         
         public ActionResult Post(int id)
