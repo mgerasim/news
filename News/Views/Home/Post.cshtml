@@ -1,0 +1,170 @@
+﻿@model NewsEntity.Models.Article
+@{
+    Layout = "~/Views/Shared/_LayoutNews.cshtml";
+}
+
+@{
+    ViewBag.Title = @Model.Title ;
+}
+
+<main class="page-content">
+    @*<div class="shell">
+        <div class="reveal-sm-flex range-xs-middle offset-top-12">
+            <h3 class="heading-italic text-light">Politics</h3>
+            <div class="divider-vertical divider-xs veil reveal-sm-inline-block offset-top-5"></div>
+            <ol class="breadcrumb">
+                <li><a href="./">Home</a></li>
+                <li><a href="#">News</a></li>
+                <li class="active">
+                    Politics
+                </li>
+            </ol>
+        </div>
+    </div>*@
+    <section class="section-top-50">
+        <div class="shell">
+            <div class="range text-md-left">
+                <div class="cell-lg-8">
+                    <div class="range range-lg-reverse">
+                        <div class="cell-lg-11">
+                            <div class="post post-default post-variant-3">
+                                @*<div class="text-left"><a href="politics.html"><span class="label label-warning">World</span></a></div>*@
+                                <div class="offset-top-12">
+                                    <div class="h1 text-gray-base">@Model.Title</div>
+                                    @*<div class="post-meta element-groups-custom offset-top-12">
+                                        <a href="politics.html" class="post-meta-author">Brian Williamson</a><a href="politics.html" class="post-meta-time">
+                                            <time datetime="2016-06-06">2h ago</time>
+                                        </a><a href="post-default.html#comments" class="post-meta-comment">15 Comments</a>
+                                    </div>*@
+                                </div>@*<img src="@Url.Content("~/images/post-01.jpg")" width="983" height="755" alt="" class="offset-top-12">*@
+                                <p></p>
+                                    @Html.Raw(@Model.Content)
+                                
+                                @*<div class="post-meta"><span class="post-meta-tags">Tagged in : <span><a href="politics.html">Politics, </a></span><span><a href="world.html">World</a></span></span></div>*@
+                            </div>
+                            @*<div class="bg-gray-base context-dark section-30 inset-left-30 inset-right-30 text-sm-left offset-top-15">
+                                <div class="unit unit-sm-horizontal unit-md-horizontal unit-lg-horizontal unit-xl-horizontal">
+                                    <div class="unit-left"><img src="images/post-04.jpg" width="150" height="150" alt="" class="post-image max-width-none" /></div>
+                                    <div class="unit-body">
+                                        <h3 class="heading-italic text-light offset-sm-top-28">
+                                            Written by <a href="politics.html">Brian Williamson</a>
+                                        </h3>
+                                        <p>Our online newspaper delivers breaking news for more than 20 years, both in a printed version and here in our online magazine</p>
+                                    </div>
+                                </div>
+                            </div>*@
+                        </div>
+                        @*<div class="cell-lg-1">
+                            <!-- list social-->
+                            <ul class="list-inline-0 stuck-lg">
+                                <li class="reveal-lg-block offset-lg-top-5"><a href="#" class="icon icon-circle fa-facebook icon-gray-base"></a></li>
+                                <li class="reveal-lg-block offset-lg-top-5"><a href="#" class="icon icon-circle fa-twitter icon-gray-base"></a></li>
+                                <li class="reveal-lg-block offset-lg-top-5"><a href="#" class="icon icon-circle fa-google-plus icon-gray-base"></a></li>
+                                <li class="reveal-lg-block offset-lg-top-5"><a href="#" class="icon icon-circle fa-youtube icon-gray-base"></a></li>
+                                <li class="reveal-lg-block offset-lg-top-5"><a href="#" class="icon icon-circle fa-feed icon-gray-base"></a></li>
+                            </ul>
+                        </div>*@
+                    </div>
+                    <hr class="divider offset-top-60">
+                    @*<div class="range range-sm-justify offset-top-30">
+                        <div class="cell-sm-6 cell-xl-4 text-sm-left">
+                            <div class="inset-left-30">
+                                <div class="font-accent small text-italic">Previous Post</div>
+                                <div class="post-prev h5 offset-top-5"><a href="post-with-audio.html" class="text-gray-base">Bradley Cooper’s &quot;Twin&quot; Causes Madness At Sundance Film Festival Opening</a></div>
+                            </div>
+                        </div>
+                        <div class="cell-sm-6 cell-xl-4 text-sm-right">
+                            <div class="inset-right-30">
+                                <div class="font-accent small text-italic">Next Post</div>
+                                <div class="post-next h5 offset-top-5"><a href="post-with-link.html" class="text-gray-base">Michelle Obama Bags on the President, Says he was a `bum</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="comments" class="heading-divider">
+                        <h3 class="heading-italic text-light">
+                            3 Responses
+                        </h3>
+                    </div>
+                    <div class="comment text-sm-left">
+                        <div class="unit unit-sm-horizontal unit-md-horizontal unit-lg-horizontal unit-xl-horizontal">
+                            <div class="unit-left"><img src="images/comment-01.jpg" width="100" alt="" class="max-width-none" /></div>
+                            <div class="unit-body">
+                                <div class="range range-xs-justify text-xs-left">
+                                    <div class="col-sm-8">
+                                        <ul class="list-inline-md font-accent small text-italic">
+                                            <li>
+                                                by <a href="categories-list.html">Brian Williamson</a>
+                                            </li>
+                                            <li><span class="icon-time text-primary">2h ago</span></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-sm-2 text-right"><a href="#reply" class="icon-reply"></a></div>
+                                </div>
+                                <p>I cannot agree more, as my brother went on to become a volunteer in Syria, fighting alongside Syrian moderate opposition versus Assad - and died. All because US did not stop Assad in 2011-2012.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="comment comment-reply text-sm-left">
+                        <div class="unit unit-sm-horizontal unit-md-horizontal unit-lg-horizontal unit-xl-horizontal">
+                            <div class="unit-left"><img src="images/comment-02.jpg" width="100" alt="" class="max-width-none" /></div>
+                            <div class="unit-body">
+                                <div class="range range-xs-justify text-xs-left">
+                                    <div class="col-sm-8">
+                                        <ul class="list-inline-md font-accent small text-italic">
+                                            <li>
+                                                by <a href="categories-list.html">Sharon Walker</a>
+                                            </li>
+                                            <li><span class="icon-time text-primary">2h ago</span></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-sm-2 text-right"><a href="#reply" class="icon-reply"></a></div>
+                                </div>
+                                <p>I also support the author. I expected the improvement of social and economic situation in our country. We will most likely remember Obama as an average president of the United States.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="divider divider-dashed"></div>
+                    <div class="comment text-sm-left">
+                        <div class="unit unit-sm-horizontal unit-md-horizontal unit-lg-horizontal unit-xl-horizontal">
+                            <div class="unit-left"><img src="images/comment-03.jpg" width="100" alt="" class="max-width-none" /></div>
+                            <div class="unit-body">
+                                <div class="range range-xs-justify text-xs-left">
+                                    <div class="col-sm-8">
+                                        <ul class="list-inline-md font-accent small text-italic">
+                                            <li>
+                                                by <a href="categories-list.html">Brian Williamson</a>
+                                            </li>
+                                            <li><span class="icon-time text-primary">2h ago</span></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-sm-2 text-right"><a href="#reply" class="icon-reply"></a></div>
+                                </div>
+                                <p>Would the current president be the one we hoped for? Maybe, but with his weakening of our international image, it became almost impossible to call the US a country with an unquestionable authority.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="reply" class="heading-divider">
+                        <h3 class="heading-italic text-light">Leave a Reply</h3>
+                    </div>
+                    <p class="text-light text-italic"></p>Your email address will not be published. Required fields are marked<span class="text-primary">*</span>
+                    <!-- RD Mailform-->
+                    <form data-result-class="rd-mailform-validate" data-form-type="contact" method="post" action="bat/rd-mailform.php" class="rd-mailform rd-mailform-gray-light-skin offset-top-30">
+                        <input type="text" name="name" data-constraints="@@NotEmpty" placeholder="Your name  *">
+                        <input type="text" name="email" data-constraints="@@NotEmpty @@Email" placeholder="Your e-mail *">
+                        <input type="text" name="name" placeholder="Your website">
+                        <textarea name="message" data-constraints="@@NotEmpty" placeholder="Comments  *"></textarea>
+                        <div class="offset-top-30 text-md-left">
+                            <button class="btn btn-warning">Submit Comment</button>
+                        </div>
+                    </form>
+                    <!-- Rd Mailform result field-->
+                    <div class="rd-mailform-validate"></div>*@
+                </div>
+                <div class="cell-lg-4 offset-top-45 offset-lg-top-0">
+                    <!-- Sidebar-->
+                    @*@Html.Partial("Sidebar")*@
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

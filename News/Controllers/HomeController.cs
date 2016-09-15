@@ -14,9 +14,28 @@ namespace News.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            var theNewsList = NewsEntity.Models.Article.GetPublished();
+            return View(theNewsList);
         }
         
+        public ActionResult Post(int id)
+        {
+            try
+            {
+                var model = NewsEntity.Models.Article.GetById(id);
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                string err = ex.Message;
+                if (ex.InnerException != null)
+                {
+                    err += ": " + ex.InnerException.Message;
+                }
+                return RedirectToAction("Index", "Home", new { error = err, notice = "" });
+            }
+        }
+
         public JsonResult NewsAll()
         {
             List<NewsEntity.Models.Article> theList = (List<NewsEntity.Models.Article>)NewsEntity.Models.Article.GetAll();

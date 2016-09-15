@@ -32,6 +32,14 @@ namespace News
             bundles.Add(new ScriptBundle("~/bundles/ckeditor").Include(
                       "~/Scripts/ckeditor.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/kingnews").Include(
+                      "~/Scripts/core.min.js",
+                      "~/Scripts/html5shiv.js",
+                      "~/Scripts/pointer-events.js",
+                      "~/Scripts/script.js"));
+
+            bundles.Add(new StyleBundle("~/Content/kingnews").Include("~/Content/style.css"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
 
             bundles.Add(new StyleBundle("~/Content/metro").Include(

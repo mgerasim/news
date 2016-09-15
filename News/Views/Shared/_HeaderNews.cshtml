@@ -1,0 +1,122 @@
+﻿
+<header class="page-head">
+    <!-- RD Navbar-->
+    <div class="rd-navbar-wrap">
+        <nav data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fullwidth" data-lg-layout="rd-navbar-static" class="rd-navbar rd-navbar-default" data-stick-up-offset="198" data-md-layout="rd-navbar-fullwidth">
+            <div class="rd-navbar-inner">
+                <!-- RD Navbar Top part-->
+                <div class="rd-navbar-top-part text-sm-left small">
+                    <!-- RD Calendar--><span class="date veil reveal-sm-block rd-calendar">@DateTime.Now.ToLongDateString()</span>
+                    <div class="rd-navbar-top-part-right">
+                        <!-- RD Navbar Search-->
+                        @*<div data-rd-navbar-toggle=".rd-navbar-search-wrap" class="rd-navbar-search-toggle"></div>
+                        <div class="rd-navbar-search-wrap">
+                            <div class="rd-navbar-search">
+                                <form action="search.php" method="GET" class="rd-navbar-search-form">
+                                    <label class="rd-navbar-search-form-input">
+                                        <input type="text" name="s" placeholder="Я желаю найти ..." autocomplete="off">
+                                    </label>
+                                    <button type="submit" class="rd-navbar-search-form-submit"></button>
+                                </form><span class="rd-navbar-live-search-results"></span>
+                            </div>
+                        </div>*@
+                        @*<div class="divider-vertical divider-xs"></div>
+                        <div class="element-groups-xl-custom user-forms">
+                            <a href="#" data-rd-navbar-toggle=".rd-navbar-login" class="rd-navbar-login-btn"><span class="icon icon-sm fa-unlock-alt text-white veil-sm"></span><span class="veil reveal-sm-inline-block">Login</span></a>
+                            <!-- Navbar login-->
+                            <div class="rd-navbar-login">
+                                <form action="#">
+                                    <div class="form-group">
+                                        <input type="text" name="name" placeholder="Your name" class="form-control">
+                                    </div>
+                                    <div class="form-group offset-top-12">
+                                        <input type="password" name="pass" placeholder="Your password" class="form-control">
+                                    </div>
+                                    <button type="submit" class="btn btn-warning offset-top-12 text-normal">Login</button>
+                                </form>
+                            </div><a href="#" data-rd-navbar-toggle=".rd-navbar-register" class="rd-navbar-register-btn"><span class="icon icon-sm fa-user text-white veil-sm"></span><span class="veil reveal-sm-inline-block">Register</span></a>
+                            <!-- rd-navbar-register-->
+                            <div class="rd-navbar-register">
+                                <form action="#">
+                                    <div class="form-group">
+                                        <input type="text" name="name" placeholder="Your name" class="form-control">
+                                    </div>
+                                    <div class="form-group offset-top-12">
+                                        <input type="password" name="pass" placeholder="Your password" class="form-control">
+                                    </div>
+                                    <button type="submit" class="btn btn-warning offset-top-12 text-normal">Register</button>
+                                </form>
+                            </div>
+                        </div>*@
+                    </div>
+                </div>
+                <!-- RD Navbar Panel-->
+                <div class="rd-navbar-panel">
+                    <!-- RD Navbar Toggle-->
+                    <button data-rd-navbar-toggle=".rd-navbar-nav-wrap" class="rd-navbar-toggle"><span></span></button>
+                    <!-- RD Navbar Brand-->
+                    <div class="rd-navbar-brand"><a href="@Url.Action("Index","Home")" class="brand-name"><span>Метео </span>Портал</a></div>
+                </div>
+                <!-- RD Navbar Wrap-->
+                @*<div class="rd-navbar-nav-wrap">
+                    <div class="rd-navbar-social-list">
+                        <!-- list social-->
+                        <ul class="list-inline-0">
+                            <li><a href="#" class="icon icon-circle fa-facebook icon-default"></a></li>
+                            <li><a href="#" class="icon icon-circle fa-twitter icon-default"></a></li>
+                            <li><a href="#" class="icon icon-circle fa-google-plus icon-default"></a></li>
+                            <li><a href="#" class="icon icon-circle fa-youtube icon-default"></a></li>
+                            <li><a href="#" class="icon icon-circle fa-feed icon-default"></a></li>
+                        </ul>
+                    </div>
+                    <!-- RD Navbar Nav-->
+                    <ul class="rd-navbar-nav">
+                        <li class="active">
+                            <a href="./">Home</a>
+                            <!-- RD Navbar Dropdown-->
+                            <ul class="rd-navbar-dropdown">
+                                <li><a href="categories-grid.html">Grid Layout</a></li>
+                                <li><a href="categories-masonry.html">Masonry Layout</a></li>
+                                <li><a href="categories-list.html">List Layout</a></li>
+                                <li>
+                                    <a href="#">Header Settings</a>
+                                    <ul class="rd-navbar-dropdown">
+                                        <li><a href="header-variant-1.html">Header style 1</a></li>
+                                        <li><a href="header-variant-2.html">Header style 2</a></li>
+                                        <li><a href="header-default.html">Header style 3</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#">Footer Settings</a>
+                                    <ul class="rd-navbar-dropdown">
+                                        <li><a href="footer-variant-1.html">Footer Style 1</a></li>
+                                        <li><a href="footer-default.html">Footer Style 2</a></li>
+                                        <li><a href="footer-variant-2.html">Footer style 3</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#">Sidebar Settings</a>
+                                    <ul class="rd-navbar-dropdown">
+                                        <li><a href="index.html">Right Sidebar</a></li>
+                                        <li><a href="index-sidebar-left.html">Left Sidebar</a></li>
+                                        <li><a href="index-sidebar-none.html">No Sidebar</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="typography.html">Typography</a></li>
+                                <li><a href="404.html">404</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="politics.html">Politics</a></li>
+                        <li><a href="business.html">Business</a></li>
+                        <li><a href="sports.html">Sports</a></li>
+                        <li><a href="culture.html">Culture</a></li>
+                        <li><a href="tech.html">Tech</a></li>
+                        <li><a href="world.html">World</a></li>
+                        <li><a href="about-us.html">About</a></li>
+                        <li><a href="contacts.html">Contacts</a></li>
+                    </ul>
+                </div>*@
+            </div>
+        </nav>
+    </div>
+</header>
