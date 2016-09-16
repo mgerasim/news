@@ -1,0 +1,75 @@
+﻿@model News.Models.NewsMain
+@{
+    Layout = "~/Views/Shared/_LayoutNews.cshtml";
+}
+
+@{
+    ViewBag.Title = "Метео Портал";
+}
+
+
+@if(Model.Error != "")
+{
+    <p>
+        @Model.Error
+    </p>
+}
+else
+{
+    
+
+
+<main class="page-content">
+   
+    <section class="section-top-26">
+        <div class="shell">
+            <div class="range text-md-left">
+                <div class="cell-lg-8">
+                   
+
+                    @if(Model.theSearchResult.Count > 0)
+                    { 
+                        <div class="heading-divider offset-top-45 offset-md-top-25">
+                            <h2>Результат поиска: @Model.S</h2>
+                        </div>
+
+                        foreach(var item in Model.theSearchResult)
+                        {
+                            <div class="post post-variant-2">
+                                <div class="unit unit-xl-horizontal text-sm-left unit-sm-horizontal unit-md-horizontal unit-lg-horizontal offset-top-25 offset-md-top-0">
+                                    <div class="unit-left">
+                                        <div class="post-inner">
+                                        </div>
+                                    </div>
+                                    <div class="unit-body">
+                                        <div class="h5 text-bold"><a href="@Url.Action("Post", "Home", new { id=@item.ID})" class="post-link">@item.Title</a></div>
+                                        <p>@Html.Raw(@item.Anons)</p>
+                                        <div class="post-meta post-meta-hidden-outer">
+                                            <div class="icon text-gray icon-lg ">
+
+                                            </div>
+                                                                             
+                                            <div class="element-groups-custom">
+                                                <div class="post-meta-time">
+                                                    <time>@item.Published_At.Value.ToLongDateString()</time>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>    
+                            <div class="divider divider-dashed"></div>
+                        }
+                    }
+                    
+                    
+                </div>
+                <div class="cell-lg-4 offset-top-36">
+                    <!-- Sidebar-->
+                    @Html.Partial("_SidebarNews")
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+}

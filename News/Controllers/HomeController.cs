@@ -50,6 +50,35 @@ namespace News.Controllers
                 return RedirectToAction("Index", "Home", new { error = err, notice = "" });
             }
         }
+        
+        public ActionResult Search(string S = "")
+        {
+            try
+            {
+                if (S != "")
+                {
+                    NewsEntity.Models.Search theSearch = new NewsEntity.Models.Search();
+                    theSearch.S = S;
+                    theSearch.Save();
+
+                    var NewsView = new NewsMain(false, S);
+                    return View(NewsView);
+                }
+                return RedirectToAction("Index", "Home");
+            }
+            catch (Exception ex)
+            {
+                string err = ex.Message;
+                if (ex.InnerException != null)
+                {
+                    err += ": " + ex.InnerException.Message;
+                }
+                var theView = new Models.NewsMain(false);
+                theView.Error = err;
+                return View(theView);
+            }
+
+        }
 
         public JsonResult NewsAll()
         {

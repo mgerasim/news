@@ -13,10 +13,11 @@ namespace News.Models
         public List<NewsEntity.Models.Article> theArticleOfWorld;
         public List<NewsEntity.Models.Article> theArticleOfOther;
         public string Error = "";
+        public string S = "";
 
-        public NewsMain(bool isLoad = true)
+        public NewsMain(bool isLoadCategory = true, string S = "")
         {
-            if (isLoad == true)
+            if (isLoadCategory == true)
             {
                 this.theArticleOfKhabarovsk = NewsEntity.Models.Article.GetByCategory(1);
                 this.theArticleOfRegion = NewsEntity.Models.Article.GetByCategory(2);
@@ -24,6 +25,13 @@ namespace News.Models
                 this.theArticleOfWorld = NewsEntity.Models.Article.GetByCategory(4);
                 this.theArticleOfOther = NewsEntity.Models.Article.GetByCategory(999);
             }
+            if (S != "")
+            {
+                this.S = S;
+                this.theSearchResult = NewsEntity.Models.Article.GetBySearch(S);
+            }
         }
+
+        public List<NewsEntity.Models.Article> theSearchResult;
     }
 }

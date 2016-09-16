@@ -44,6 +44,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Portable.Text.Encoding">
+      <HintPath>..\packages\Portable.Text.Encoding.0.8.3.0\lib\portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10\Portable.Text.Encoding.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
@@ -530,6 +533,7 @@
     <Content Include="Views\Shared\_FooterNews.cshtml" />
     <Content Include="Views\Shared\_SidebarNews.cshtml" />
     <Content Include="Views\Home\Post.cshtml" />
+    <Content Include="Views\Home\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

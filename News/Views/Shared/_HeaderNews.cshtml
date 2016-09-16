@@ -9,17 +9,17 @@
                     <!-- RD Calendar--><span class="date veil reveal-sm-block rd-calendar">@DateTime.Now.ToLongDateString()</span>
                     <div class="rd-navbar-top-part-right">
                         <!-- RD Navbar Search-->
-                        @*<div data-rd-navbar-toggle=".rd-navbar-search-wrap" class="rd-navbar-search-toggle"></div>
+                        <div data-rd-navbar-toggle=".rd-navbar-search-wrap" class="rd-navbar-search-toggle"></div>
                         <div class="rd-navbar-search-wrap">
                             <div class="rd-navbar-search">
-                                <form action="search.php" method="GET" class="rd-navbar-search-form">
+                                <form action="@Url.Action("Search","Home")" method="GET" class="rd-navbar-search-form">
                                     <label class="rd-navbar-search-form-input">
-                                        <input type="text" name="s" placeholder="Я желаю найти ..." autocomplete="off">
+                                        <input type="text" name="s" placeholder="Я желаю найти ..." autocomplete="off" >
                                     </label>
                                     <button type="submit" class="rd-navbar-search-form-submit"></button>
                                 </form><span class="rd-navbar-live-search-results"></span>
                             </div>
-                        </div>*@
+                        </div>
                         @*<div class="divider-vertical divider-xs"></div>
                         <div class="element-groups-xl-custom user-forms">
                             <a href="#" data-rd-navbar-toggle=".rd-navbar-login" class="rd-navbar-login-btn"><span class="icon icon-sm fa-unlock-alt text-white veil-sm"></span><span class="veil reveal-sm-inline-block">Login</span></a>

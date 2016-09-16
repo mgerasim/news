@@ -31,11 +31,16 @@
                                 @*<div class="text-left"><a href="politics.html"><span class="label label-warning">World</span></a></div>*@
                                 <div class="offset-top-12">
                                     <div class="h1 text-gray-base">@Model.Title</div>
-                                    @*<div class="post-meta element-groups-custom offset-top-12">
-                                        <a href="politics.html" class="post-meta-author">Brian Williamson</a><a href="politics.html" class="post-meta-time">
+                                    
+                                    <div class="post-meta element-groups-custom offset-top-12">                                        
+                                        <div class="post-meta-time">
+                                            <time>@Model.Published_At.Value.ToLongDateString()</time>
+                                        </div>
+
+                                        @*<a href="politics.html" class="post-meta-author">Brian Williamson</a><a href="politics.html" class="post-meta-time">
                                             <time datetime="2016-06-06">2h ago</time>
-                                        </a><a href="post-default.html#comments" class="post-meta-comment">15 Comments</a>
-                                    </div>*@
+                                        </a><a href="post-default.html#comments" class="post-meta-comment">15 Comments</a>*@
+                                    </div>
                                 </div>@*<img src="@Url.Content("~/images/post-01.jpg")" width="983" height="755" alt="" class="offset-top-12">*@
                                 <p></p>
                                     @Html.Raw(@Model.Content)
@@ -162,7 +167,7 @@
                 </div>
                 <div class="cell-lg-4 offset-top-45 offset-lg-top-0">
                     <!-- Sidebar-->
-                    @*@Html.Partial("Sidebar")*@
+                    @Html.Partial("Sidebar")
                 </div>
             </div>
         </div>

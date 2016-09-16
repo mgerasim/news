@@ -102,5 +102,10 @@ namespace NewsEntity.Models
             NewsEntity.Repositories.ArticleRepository repo = new Repositories.ArticleRepository();
             return repo.GetByCategory(Category);
         }
+        public static List<Article> GetBySearch(string S)
+        {
+            NewsEntity.Repositories.ArticleRepository repo = new Repositories.ArticleRepository();
+            return repo.GetBySearch(S);
+        }
     }
 }
