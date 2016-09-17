@@ -49,18 +49,16 @@ namespace NewsCore.Grabber
 
                     string data = readStream.ReadToEnd();
 
+                    Encoding encoding = Encoding.Default;
+                    encoding = readStream.CurrentEncoding; 
+
+                    byte[] encBytes = encoding.GetBytes(data);
+                    byte[] utf8Bytes = Encoding.Convert(encoding, Encoding.UTF8, encBytes);
+                    data = Encoding.UTF8.GetString(utf8Bytes);
+                    
                     response.Close();
                     readStream.Close();
-
-                    Encoding srcEncodingFormat = Encoding.GetEncoding("cp1251");
-                    Encoding dstEncodingFormat = Encoding.UTF8;
-                    byte[] originalByteString = srcEncodingFormat.GetBytes(data);
-                    byte[] convertedByteString = Encoding.Convert(srcEncodingFormat,
-                    dstEncodingFormat, originalByteString);
-                    string finalString = dstEncodingFormat.GetString(convertedByteString);
-
-                    data = finalString;
-
+                
                     var doc = new HtmlAgilityPack.HtmlDocument();
                     HtmlAgilityPack.HtmlNode.ElementsFlags["br"] = HtmlAgilityPack.HtmlElementFlag.Empty;
                     doc.LoadHtml(data);
@@ -72,7 +70,10 @@ namespace NewsCore.Grabber
                         throw new Exception("Не обнаружен тег ul type=circle");
                     }
 
-                    tagCircle.RemoveChild(tagCircle.FirstChild);
+                    //tagCircle.RemoveChild(tagCircle.FirstChild);
+                    
+
+                    Log(data);
 
 
 
@@ -137,91 +138,132 @@ namespace NewsCore.Grabber
         {
             try
             {
-                Log("GrabberDvrcpodNews: Run");
-                string urlAddress = "http://primpogoda.ru/news/";
-                Log("GrabberDvrcpodNews: urlAddress: " + urlAddress);
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://dvrcpod.ru/News.php/");
+                StreamReader reader = new StreamReader(request.GetResponse().GetResponseStream(), Encoding.GetEncoding(1251));
+                string data = reader.ReadToEnd();
 
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(urlAddress);
-                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                reader.Close();
 
-                if (response.StatusCode == HttpStatusCode.OK)
+                var doc = new HtmlAgilityPack.HtmlDocument();
+                HtmlAgilityPack.HtmlNode.ElementsFlags["br"] = HtmlAgilityPack.HtmlElementFlag.Empty;
+                doc.LoadHtml(data);
+
+                string xpathDivSelector = "//ul[@type='circle']";
+                var tagCircle = doc.DocumentNode.SelectSingleNode(xpathDivSelector);
+                if (tagCircle == null)
                 {
-                    Stream receiveStream = response.GetResponseStream();
-                    StreamReader readStream = null;
+                    throw new Exception("Не обнаружен тег ul type=circle");
+                }
+                tagCircle.RemoveChild(tagCircle.FirstChild);
 
-                    if (response.CharacterSet == null)
+                var tagLI = tagCircle.FirstChild;
+                if (tagLI == null)
+                {
+                    throw new Exception("Не обнаружен тег li");
+                }
+                tagLI.RemoveChild(tagLI.FirstChild);
+
+
+                var tagNews = tagLI.FirstChild;
+                if (tagNews == null)
+                {
+                    throw new Exception("Не обнаружен тег ul новостей");
+                }
+
+                foreach(var item in tagNews.ChildNodes)
+                {
+                    if (item.Name != "li")
                     {
-                        readStream = new StreamReader(receiveStream);
+                        continue;
                     }
-                    else
-                    {
-                        readStream = new StreamReader(receiveStream, Encoding.GetEncoding(response.CharacterSet));
-                    }
+                    Log(item.InnerHtml);
+                }
 
-                    string data = readStream.ReadToEnd();
+                Log("GrabberDvrcpodNews: Run");
+                //string urlAddress = "http://primpogoda.ru/news/";
+                //Log("GrabberDvrcpodNews: urlAddress: " + urlAddress);
 
-                    response.Close();
-                    readStream.Close();
+                //HttpWebRequest request = (HttpWebRequest)WebRequest.Create(urlAddress);
+                //HttpWebResponse response = (HttpWebResponse)request.GetResponse();
 
-                    var doc = new HtmlAgilityPack.HtmlDocument();
-                    HtmlAgilityPack.HtmlNode.ElementsFlags["br"] = HtmlAgilityPack.HtmlElementFlag.Empty;
-                    doc.LoadHtml(data);
+                //if (response.StatusCode == HttpStatusCode.OK)
+                //{
+                //    Stream receiveStream = response.GetResponseStream();
+                //    StreamReader readStream = null;
 
-                    string xpathDivSelector = "//ul[@class='no-bullet news-list']";
-                    var tagNewsList = doc.DocumentNode.SelectSingleNode(xpathDivSelector);
-                    if (tagNewsList == null)
-                    {
-                        throw new Exception("Не обнаружен тег ul с классом news-list");
-                    }
+                //    if (response.CharacterSet == null)
+                //    {
+                //        readStream = new StreamReader(receiveStream);
+                //    }
+                //    else
+                //    {
+                //        readStream = new StreamReader(receiveStream, Encoding.GetEncoding(response.CharacterSet));
+                //    }
 
-                    foreach (var item in tagNewsList.ChildNodes)
-                    {
-                        if (item.Name != "li")
-                        {
-                            continue;
-                        }
+                //    string data = readStream.ReadToEnd();
 
-                        if (item.Attributes["style"] != null && item.Attributes["style"].Value == "display: none")
-                        {
-                            continue;
-                        }
+                //    response.Close();
+                //    readStream.Close();
 
-                        item.RemoveChild(item.FirstChild);
-                        var tagDivRow = item.FirstChild;
-                        if (tagDivRow == null)
-                        {
-                            throw new Exception("Не обнаружен тег div class=row ...");
-                        }
+                //    var doc = new HtmlAgilityPack.HtmlDocument();
+                //    HtmlAgilityPack.HtmlNode.ElementsFlags["br"] = HtmlAgilityPack.HtmlElementFlag.Empty;
+                //    doc.LoadHtml(data);
+
+                //    string xpathDivSelector = "//ul[@class='no-bullet news-list']";
+                //    var tagNewsList = doc.DocumentNode.SelectSingleNode(xpathDivSelector);
+                //    if (tagNewsList == null)
+                //    {
+                //        throw new Exception("Не обнаружен тег ul с классом news-list");
+                //    }
+
+                //    foreach (var item in tagNewsList.ChildNodes)
+                //    {
+                //        if (item.Name != "li")
+                //        {
+                //            continue;
+                //        }
+
+                //        if (item.Attributes["style"] != null && item.Attributes["style"].Value == "display: none")
+                //        {
+                //            continue;
+                //        }
+
+                //        item.RemoveChild(item.FirstChild);
+                //        var tagDivRow = item.FirstChild;
+                //        if (tagDivRow == null)
+                //        {
+                //            throw new Exception("Не обнаружен тег div class=row ...");
+                //        }
 
 
-                        tagDivRow.RemoveChild(tagDivRow.FirstChild);
-                        var tagDivSmall = tagDivRow.FirstChild;
-                        if (tagDivSmall == null)
-                        {
-                            throw new Exception("Не обнаружен тег div class=small-3 ...");
-                        }
+                //        tagDivRow.RemoveChild(tagDivRow.FirstChild);
+                //        var tagDivSmall = tagDivRow.FirstChild;
+                //        if (tagDivSmall == null)
+                //        {
+                //            throw new Exception("Не обнаружен тег div class=small-3 ...");
+                //        }
 
-                        var tagA = tagDivSmall.FirstChild;
-                        if (tagA == null)
-                        {
-                            throw new Exception("Не обнаружен тег a class=th");
-                        }
+                //        var tagA = tagDivSmall.FirstChild;
+                //        if (tagA == null)
+                //        {
+                //            throw new Exception("Не обнаружен тег a class=th");
+                //        }
 
-                        tagA.RemoveChild(tagA.FirstChild);
-                        var tagImg = tagA.FirstChild;
-                        if (tagImg == null)
-                        {
-                            throw new Exception("Не обнаружен тег img");
-                        }
-                        string urlImage = "http://primpogoda.ru" + tagImg.Attributes["src"].Value;
+                //        tagA.RemoveChild(tagA.FirstChild);
+                //        var tagImg = tagA.FirstChild;
+                //        if (tagImg == null)
+                //        {
+                //            throw new Exception("Не обнаружен тег img");
+                //        }
+                //        string urlImage = "http://primpogoda.ru" + tagImg.Attributes["src"].Value;
 
-                        string urlNews = tagA.Attributes["href"].Value;
+                //        string urlNews = tagA.Attributes["href"].Value;
                                               
 
-                        Log(urlNews);
-                        this.GrabberNews(urlNews, urlImage);
-                    }
-                }
+                //        Log(urlNews);
+                //        this.GrabberNews(urlNews, urlImage);
+                 //   }
+               // }
             }
             catch (Exception ex)
             {

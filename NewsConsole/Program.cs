@@ -12,7 +12,7 @@ namespace NewsConsole
     {
         static void Main(string[] args)
         {
-            SupportUpdateSchema();
+            //SupportUpdateSchema();
           //  SupportLogger();
             //SupportGrabber();
             //SupportGrabberPrimpogodaWeatherNow();
