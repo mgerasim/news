@@ -46,6 +46,15 @@
                     @Html.ValidationMessageFor(model => model.Anons)
                 </div>
             </div>
+            
+            <div class="row">
+                <div class="offset10">
+                    <label class="block">Проверить орфографию:</label>
+
+                    <a href="https://orfogrammka.ru" target="_blank">Орфограммка</a>
+                    <a href="https://text.ru/spelling/unauthorized" target="_blank">Text.Ru</a>
+                </div>
+            </div>
 
             <div class="row">
                 <div class="offset10">
@@ -71,7 +80,15 @@
                     <select name="Category">
                         @foreach (var category in NewsEntity.Models.Article.CategoryList)
                         {
-                            <option value="@category.ID">@category.Name</option>
+                            if (category.ID == Model.Category)
+                            {
+                                <option value="@category.ID" selected>@category.Name</option>    
+                            }
+                            else
+                            {
+                                <option value="@category.ID">@category.Name</option>
+                            }
+                            
                         }
                     </select>
                 </div>

@@ -37,8 +37,10 @@ namespace NewsServiceGrabber
             try
             {
                 theLogger.Log("NewsServiceGrabber: TimerTick");
-                IGrabber theGrabber = new GrabberPrimpogodaLenta(theLogger);
-                theGrabber.Run();
+                IGrabber theGrabberPrimpogodaLenta = new GrabberPrimpogodaLenta(theLogger);
+                theGrabberPrimpogodaLenta.Run();
+                IGrabber theGrabberDvrcpod = new GrabberDvrcpodNews(theLogger);
+                theGrabberDvrcpod.Run();
             }
             catch (Exception ex)
             {
