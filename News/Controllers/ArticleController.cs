@@ -48,10 +48,16 @@ namespace News.Views
             {
                 var model = NewsEntity.Models.Article.GetById(id);
 
+                if (model.Published_At == null)
+                {
+                    throw new Exception("Необходимо сначало опубликовать данную статью на Метео Портал");
+                }
+
                 var request = (HttpWebRequest)WebRequest.Create("http://khabmeteo.ru/cgi-bin/auth/addnews.cgi?news=transfer");
 
                 var postData = "heading=" + model.Title;
-                postData += "&addnews=" + model.Anons;
+                postData += "&addnews=" + model.Anons.Replace("&laquo;", "").Replace("&raquo;", ""); 
+                postData += "&ref_meteodv=" + model.ID;
 
                 string str = postData;
                 Encoding srcEncodingFormat = Encoding.UTF8;
