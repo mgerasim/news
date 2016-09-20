@@ -71,7 +71,7 @@ namespace NewsEntity.Repositories
             }
         }
 
-        public List<Article> GetByCategory(int Category)
+        public List<Article> GetByCategory(int Category, int offset = 0, int max = -1, int recent_days = 0)
         {
             using (ISession session = NHibernateHelper.OpenSession())
             {
@@ -79,6 +79,15 @@ namespace NewsEntity.Repositories
                 criteria.AddOrder(Order.Desc("ID"));
                 criteria.Add(Restrictions.IsNotNull("Published_At"));
                 criteria.Add(Restrictions.Eq("Category", Category));
+                if (max > 0)
+                {
+                    criteria.SetMaxResults(max);                    
+                }
+
+                if (recent_days > 0)
+                {
+                    criteria.Add(Restrictions.Ge("Published_At", DateTime.Now.AddDays(-1 * recent_days)));
+                }
                 return criteria.List<Article>().ToList<Article>();
             }
         }

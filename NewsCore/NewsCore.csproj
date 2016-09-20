@@ -48,6 +48,7 @@
     <Compile Include="Grabber\GrabberPrimpogoda.cs" />
     <Compile Include="Grabber\GrabberDvrcpodNews.cs" />
     <Compile Include="Grabber\GrabberPrimpogodaLenta.cs" />
+    <Compile Include="Grabber\GrabberKhabmeteoHydrology.cs" />
     <Compile Include="Grabber\GrabberPrimpogodaWeatherNow.cs" />
     <Compile Include="Grabber\IGrabber.cs" />
     <Compile Include="Logger\LoggerConsole.cs" />

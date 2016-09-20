@@ -41,6 +41,8 @@ namespace NewsServiceGrabber
                 theGrabberPrimpogodaLenta.Run();
                 IGrabber theGrabberDvrcpod = new GrabberDvrcpodNews(theLogger);
                 theGrabberDvrcpod.Run();
+                IGrabber theGrabberKhabmeteoHydrology = new GrabberKhabmeteoHydrology(theLogger);
+                theGrabberKhabmeteoHydrology.Run();
             }
             catch (Exception ex)
             {

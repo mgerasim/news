@@ -26,6 +26,7 @@ namespace NewsEntity.Models
             new CategoryItem(2, "Новости Дальневосточного региона РФ"),
             new CategoryItem(3, "Новости России"),
             new CategoryItem(4, "Новости в Мире"),
+            new CategoryItem(5, "Гидрологическая обстановка"),
             new CategoryItem(999, "Статьи")
         }
 
@@ -97,10 +98,10 @@ namespace NewsEntity.Models
             NewsEntity.Repositories.ArticleRepository repo = new Repositories.ArticleRepository();
             return repo.GetPublished();
         }
-        public static List<Article> GetByCategory(int Category)
+        public static List<Article> GetByCategory(int Category, int offset = 0, int max = -1, int recent_days = 0)
         {
             NewsEntity.Repositories.ArticleRepository repo = new Repositories.ArticleRepository();
-            return repo.GetByCategory(Category);
+            return repo.GetByCategory(Category, offset, max, recent_days);
         }
         public static List<Article> GetBySearch(string S)
         {
