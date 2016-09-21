@@ -63,7 +63,7 @@ namespace NewsCore.Grabber
                     hydroArticle.Published_At = DateTime.Now;
                     hydroArticle.Source_Published_At = DateTime.Now;
                     hydroArticle.Source_Site = "khabmeteo.ru";
-                    hydroArticle.Source_Url = "http://khabmeteo.ru/cgi-bin/gidrolog.cgi";
+                    hydroArticle.Source_Url = "http://khabmeteo.ru/cgi-bin/gidrolog.cgi|?tmp=" + DateTime.Now.Ticks.ToString();
                     hydroArticle.Title = "Гидрологическая обстановка за " + DateTime.Now.ToShortDateString();
                     hydroArticle.Category = 5;
                     hydroArticle.Save();

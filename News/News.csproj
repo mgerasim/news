@@ -538,6 +538,7 @@
     <Content Include="Views\Shared\_NavbarNews.cshtml" />
     <Content Include="Views\Review\Index.cshtml" />
     <Content Include="Views\Review\Hydrology.cshtml" />
+    <Content Include="Views\Review\Operative.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

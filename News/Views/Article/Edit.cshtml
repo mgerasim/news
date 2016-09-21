@@ -36,12 +36,7 @@
 
                     <div class="input-control textarea">
                         @Html.TextAreaFor(model => model.Anons, new { id = "Article_Anons" })
-                        <script>
-                            CKEDITOR.replace("Article_Anons",
-                                {
-                                    enterMode: CKEDITOR.ENTER_BR
-                                });
-                        </script>
+                        
                     </div>
                     @Html.ValidationMessageFor(model => model.Anons)
                 </div>

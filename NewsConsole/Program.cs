@@ -16,11 +16,17 @@ namespace NewsConsole
           //  SupportLogger();
             //SupportGrabber();
             //SupportGrabberPrimpogodaWeatherNow();
-           SupportGrabberPrimpogodaLenta();
+           //SupportGrabberPrimpogodaLenta();
             //SupportGrabberDvrcpodLenta();
             //SupportGrabberKhabmeteoHydrology();
-
+           SupportGrabberKhabkrai();
             Console.ReadKey();
+        }
+        static void SupportGrabberKhabkrai()
+        {
+            ILogger theLogger = new LoggerConsole();
+            IGrabber theGrabber = new GrabberKhabkrai(theLogger);
+            theGrabber.Run();
         }
         static void SupportGrabberKhabmeteoHydrology()
         {

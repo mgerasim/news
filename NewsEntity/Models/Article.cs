@@ -27,6 +27,7 @@ namespace NewsEntity.Models
             new CategoryItem(3, "Новости России"),
             new CategoryItem(4, "Новости в Мире"),
             new CategoryItem(5, "Гидрологическая обстановка"),
+            new CategoryItem(6, "Оперативная информация"),
             new CategoryItem(999, "Статьи")
         }
 

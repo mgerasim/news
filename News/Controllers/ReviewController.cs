@@ -15,7 +15,7 @@ namespace News.Controllers
         {
             try {
                 var model = new News.Models.NewsMain(false);
-                model.LoadHydrology();
+                model.LoadReview();
                 return View(model);
             }
             catch (Exception ex)
@@ -29,6 +29,14 @@ namespace News.Controllers
             }
         }
 
+        //
+        // GET: /Review/Operative/5
+
+        public ActionResult Operative(int id)
+        {
+            var model = NewsEntity.Models.Article.GetById(id);
+            return View(model);
+        }
         //
         // GET: /Review/Hydrology/5
 
