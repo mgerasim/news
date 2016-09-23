@@ -29,7 +29,16 @@ namespace News.Controllers
             }
         }
 
-        
+
+        //
+        // GET: /Review/Geospace/5
+
+        public ActionResult Geospace()
+        {
+            var model = NewsEntity.Models.GeospaceReview.GetByLast();
+            return View(model);
+        }
+
         //
         // GET: /Review/Operative/5
 

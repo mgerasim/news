@@ -14,6 +14,7 @@ namespace News.Models
         public List<NewsEntity.Models.Article> theArticleOfOther;
         public NewsEntity.Models.Article theReviewHydrology;
         public NewsEntity.Models.Article theReviewOperative;
+        public NewsEntity.Models.GeospaceReview theReviewGeospace;
         public string Error = "";
         public string S = "";
 
@@ -50,7 +51,9 @@ namespace News.Models
             if (list.Count > 0)
             {
                 this.theReviewOperative = list.First();
-            }           
+            }
+            this.theReviewGeospace = NewsEntity.Models.GeospaceReview.GetByLast();
+            
         }
 
         public List<NewsEntity.Models.Article> theSearchResult;

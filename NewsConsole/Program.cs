@@ -20,8 +20,15 @@ namespace NewsConsole
             //SupportGrabberDvrcpodLenta();
             //SupportGrabberKhabmeteoHydrology();
 //          SupportGrabberKhabkrai();
-            SupportGrabberGeoStorm();
+            //SupportGrabberGeoStorm();
+            SupportGeospace();
             Console.ReadKey();
+        }
+
+        static void SupportGeospace() 
+        {
+            NewsEntity.Models.GeospaceReview model = NewsEntity.Models.GeospaceReview.GetByLast();
+            
         }
         static void SupportGrabberGeoStorm()
         {
