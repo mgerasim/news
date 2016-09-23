@@ -6,49 +6,18 @@ using System.Web.Mvc;
 
 namespace News.Controllers
 {
-    public class ReviewController : Controller
+    public class WindytyController : Controller
     {
         //
-        // GET: /Review/
+        // GET: /Windyty/
 
         public ActionResult Index()
         {
-            try {
-                var model = new News.Models.NewsMain(false);
-                model.LoadReview();
-                return View(model);
-            }
-            catch (Exception ex)
-            {
-                string err = ex.Message;
-                if (ex.InnerException != null)
-                {
-                    err += ": " + ex.InnerException.Message;
-                }
-                return RedirectToAction("Index", "Home", new { error = err, notice = "" });
-            }
-        }
-
-        
-        //
-        // GET: /Review/Operative/5
-
-        public ActionResult Operative(int id)
-        {
-            var model = NewsEntity.Models.Article.GetById(id);
-            return View(model);
+            return View();
         }
 
         //
-        // GET: /Review/Hydrology/5
-
-        public ActionResult Hydrology(int id)
-        {
-            var model = NewsEntity.Models.Article.GetById(id);
-            return View(model);
-        }
-        //
-        // GET: /Review/Details/5
+        // GET: /Windyty/Details/5
 
         public ActionResult Details(int id)
         {
@@ -56,7 +25,7 @@ namespace News.Controllers
         }
 
         //
-        // GET: /Review/Create
+        // GET: /Windyty/Create
 
         public ActionResult Create()
         {
@@ -64,7 +33,7 @@ namespace News.Controllers
         }
 
         //
-        // POST: /Review/Create
+        // POST: /Windyty/Create
 
         [HttpPost]
         public ActionResult Create(FormCollection collection)
@@ -82,7 +51,7 @@ namespace News.Controllers
         }
 
         //
-        // GET: /Review/Edit/5
+        // GET: /Windyty/Edit/5
 
         public ActionResult Edit(int id)
         {
@@ -90,7 +59,7 @@ namespace News.Controllers
         }
 
         //
-        // POST: /Review/Edit/5
+        // POST: /Windyty/Edit/5
 
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
@@ -108,7 +77,7 @@ namespace News.Controllers
         }
 
         //
-        // GET: /Review/Delete/5
+        // GET: /Windyty/Delete/5
 
         public ActionResult Delete(int id)
         {
@@ -116,7 +85,7 @@ namespace News.Controllers
         }
 
         //
-        // POST: /Review/Delete/5
+        // POST: /Windyty/Delete/5
 
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)

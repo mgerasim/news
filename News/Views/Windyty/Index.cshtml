@@ -1,0 +1,27 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_LayoutNews.cshtml";
+}
+
+@{
+    ViewBag.Title = "Карта ветров";
+}
+
+<main class="page-content">   
+    <section class="section-top-50">
+        <div class="shell">
+            <div class="range text-md-left">
+                <div class="cell-lg-8">
+                    <div class="range range-lg-reverse">
+                        <iframe style="width: 100%; height: 50em;" src="https://embed.windyty.com/?48.482,134.500,9,message,metric.wind.m/s" frameborder="0"></iframe>
+                    </div>
+                    <hr class="divider offset-top-60">
+                </div>
+                <div class="cell-lg-4 offset-top-45 offset-lg-top-0">
+                    <!-- Sidebar-->
+                    @Html.Partial("_SidebarNews")
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

@@ -30,7 +30,9 @@ namespace News.Views
                 var model = NewsEntity.Models.Article.GetById(id);
                 model.Published_At = DateTime.Now;
                 model.Update();
-                return RedirectToAction("Index", "Article");
+
+                string notice = "Публикация " + model.Title + " успешна размещена на Метео Портале";
+                return RedirectToAction("Index", "Article", new { error = "", notice = notice });
             }
             catch (Exception ex)
             {
@@ -72,22 +74,32 @@ namespace News.Views
                 request.Method = "POST";
                 request.ContentType = "application/x-www-form-urlencoded";
                 request.ContentLength = data.Length;
+                request.Proxy = null;
                 
                 // authentication
                 var cache = new CredentialCache();
                 Uri uri = new Uri("http://khabmeteo.ru/cgi-bin/auth");
                 cache.Add(uri, "Basic", new NetworkCredential("khabmeteo", "mqnihq8j"));
                 request.Credentials = cache;
-
-
+                
                 using (var stream = request.GetRequestStream())
                 {
                     stream.Write(data, 0, data.Length);
                 }
 
-                var response = (HttpWebResponse)request.GetResponse();
+                request.Timeout = 7000;
 
-                var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
+                using (var response = (HttpWebResponse)request.GetResponse())                
+                {
+                    using (var responseString = response.GetResponseStream())
+                    {
+
+                    }
+
+                    response.Close();
+                }
+
+                
 
                 string notice = "Публикация " + model.Title + " успешна размещена на khabmeteo.ru";
                 return RedirectToAction("Index", "Article", new { error = "", notice = notice });

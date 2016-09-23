@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace NewsCore.Grabber
 {
-    public class GrabberKhabkrai : IGrabber
+    public class GrabberGeoStorm : IGrabber
     {
         ILogger theLogger;
         private void Log(string msg)
@@ -20,7 +20,7 @@ namespace NewsCore.Grabber
             }
         }
         
-        public GrabberKhabkrai(ILogger theLogger = null)
+        public GrabberGeoStorm(ILogger theLogger = null)
         {
             this.theLogger = theLogger;
         }
@@ -28,7 +28,7 @@ namespace NewsCore.Grabber
         {
             try
             {
-                string urlSite = "https://khabkrai.ru";
+                string urlSite = "http://geo-storm.ru";
                 string urlAddress = urlSite + urlNews;
 
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(urlAddress);
@@ -57,32 +57,37 @@ namespace NewsCore.Grabber
                     HtmlAgilityPack.HtmlNode.ElementsFlags["br"] = HtmlAgilityPack.HtmlElementFlag.Empty;
                     doc.LoadHtml(data);
 
-                    string xpathDivSelector = "//span[@class='wrapper']";
+                    string xpathDivSelector = "//div[@class='content']";
                     var tagNewsWrapper = doc.DocumentNode.SelectSingleNode(xpathDivSelector);
                     if (tagNewsWrapper == null)
                     {
-                        throw new Exception("Не обнаружен тег span с классом wraper");
+                        throw new Exception("Не обнаружен тег div с классом content");
                     }
-                    string Title = tagNewsWrapper.InnerText;
+                    tagNewsWrapper.RemoveChild(tagNewsWrapper.FirstChild);
+                    tagNewsWrapper.RemoveChild(tagNewsWrapper.FirstChild);
+                    tagNewsWrapper.RemoveChild(tagNewsWrapper.FirstChild);
+                    
+                    string Title = tagNewsWrapper.FirstChild.InnerText;
 
-                    var tagContent = doc.DocumentNode.SelectSingleNode("//div[@class='content-text']");
+                    var tagContent = doc.DocumentNode.SelectSingleNode("//div[@class='banons b']");
                     if (tagContent == null)
                     {
-                        throw new Exception("Не обнаружен тег div с классом content-text");
+                        throw new Exception("Не обнаружен тег div с классом banons b");
                     }
 
-                    var tagWatchDateTime = doc.DocumentNode.SelectSingleNode("//div[@class='material-date data-item']");
-                    string watchDateTimeString = tagWatchDateTime.InnerText.Trim().Replace("&nbsp;", " ");
-                    string[] months = { "января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря" };
-
-                    int i = 0;
-                    foreach (var month in months)
-                    {
-                        i++;
-                        watchDateTimeString = watchDateTimeString.Replace(month, i.ToString("00"));
-                    }
+                    var watchDateTimeString = tagContent.FirstChild.InnerText;
                     
-                    DateTime watchDateTime = DateTime.ParseExact(watchDateTimeString, "dd MM yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                    DateTime watchDateTime = DateTime.ParseExact(watchDateTimeString, "dd.MM.yyyy", System.Globalization.CultureInfo.InvariantCulture);
+
+                    tagContent.RemoveChild(tagContent.FirstChild);
+                    tagContent.RemoveChild(tagContent.FirstChild);
+
+                    tagContent.FirstChild.Attributes["href"].Value = urlSite + tagContent.FirstChild.Attributes["href"].Value;
+
+                    var tagImg = tagContent.FirstChild.FirstChild;
+                    tagImg.Attributes["src"].Value = urlSite + tagImg.Attributes["src"].Value;
+                    tagContent.RemoveChild(tagContent.FirstChild);
+                    tagContent.InsertBefore(tagImg, tagContent.FirstChild);
 
                     NewsEntity.Models.Article theNews = NewsEntity.Models.Article.GetBySource(urlAddress);
                     if (theNews == null)
@@ -90,12 +95,20 @@ namespace NewsCore.Grabber
                         theNews = new NewsEntity.Models.Article();
                         theNews.Title = Title;
                         tagContent.RemoveChild(tagContent.LastChild);
-                        theNews.Content = tagContent.InnerHtml + "<p>Пресс-служба Губернатора и Правительства Хабаровского края www.khabkrai.ru</p>";
+                        tagContent.RemoveChild(tagContent.LastChild);
+                        tagContent.RemoveChild(tagContent.LastChild);
+                        tagContent.RemoveChild(tagContent.LastChild);
+                        tagContent.RemoveChild(tagContent.LastChild);
+                        tagContent.RemoveChild(tagContent.LastChild);
+                        tagContent.RemoveChild(tagContent.LastChild);
+                        theNews.Content = tagContent.InnerHtml;
+
+                        tagContent.RemoveChild(tagContent.FirstChild);
                         theNews.Anons = tagContent.FirstChild.InnerText;
                         theNews.Source_Published_At = watchDateTime;
                         theNews.Source_Site = urlSite;
                         theNews.Source_Url = urlAddress;
-                        theNews.Category = 6;
+                        theNews.Category = 999;
                         theNews.Published_At = DateTime.Now;
                         theNews.Save();
                     }
@@ -118,8 +131,8 @@ namespace NewsCore.Grabber
         {
             try
             {
-                Log("GrabberKhabkrai::Run");
-                string urlSite = "https://khabkrai.ru/events/news";
+                Log("GrabberGeoStorm::Run");
+                string urlSite = "http://geo-storm.ru/priroda-i-klimat/pogoda/";
                 string urlAddress = urlSite;
 
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(urlAddress);
@@ -148,24 +161,24 @@ namespace NewsCore.Grabber
                     HtmlAgilityPack.HtmlNode.ElementsFlags["br"] = HtmlAgilityPack.HtmlElementFlag.Empty;
                     doc.LoadHtml(data);
 
-                    string xpathDivSelector = "//div[@class='news-title news-textfield']";
+                    string xpathDivSelector = "//div[@class='banons']";
                     var tagNewsList = doc.DocumentNode.SelectNodes(xpathDivSelector);
                     if (tagNewsList == null)
                     {
-                        throw new Exception("Не обнаружен тег div с классом news-title news-textfield");
+                        throw new Exception("Не обнаружен тег div с классом banons");
                     }
                     foreach (var news in tagNewsList)
                     {
-                        string template = "Оперативная информация";
-                        if (news.InnerText.Trim().Substring(0, 22) == template)
-                        {
-                            Log(news.InnerText.Trim());
-                            news.RemoveChild(news.FirstChild);
-                            string urlNews = news.FirstChild.Attributes["href"].Value;
-                            Log(urlNews);
-                            this.GrabberNews(urlNews);
-                            break;
+                        var tagNews = news.FirstChild;
+                        if (tagNews == null) {
+                            Log("Error: Не обнаружена ссылка на статью");
+                            continue;
                         }
+                        if (tagNews.Name == "a")
+                        {
+                            this.GrabberNews(tagNews.Attributes["href"].Value);
+                        }
+
                     }
                 }
 

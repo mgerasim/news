@@ -135,6 +135,7 @@
     <Compile Include="Controllers\MediaController.cs" />
     <Compile Include="Controllers\ReviewController.cs" />
     <Compile Include="Controllers\SchemaController.cs" />
+    <Compile Include="Controllers\WindytyController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -539,6 +540,7 @@
     <Content Include="Views\Review\Index.cshtml" />
     <Content Include="Views\Review\Hydrology.cshtml" />
     <Content Include="Views\Review\Operative.cshtml" />
+    <Content Include="Views\Windyty\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -19,8 +19,15 @@ namespace NewsConsole
            //SupportGrabberPrimpogodaLenta();
             //SupportGrabberDvrcpodLenta();
             //SupportGrabberKhabmeteoHydrology();
-           SupportGrabberKhabkrai();
+//          SupportGrabberKhabkrai();
+            SupportGrabberGeoStorm();
             Console.ReadKey();
+        }
+        static void SupportGrabberGeoStorm()
+        {
+            ILogger theLogger = new LoggerConsole();
+            IGrabber theGrabber = new GrabberGeoStorm(theLogger);
+            theGrabber.Run();
         }
         static void SupportGrabberKhabkrai()
         {

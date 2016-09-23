@@ -53,13 +53,21 @@ namespace NewsCore.Grabber
                 }
                 string Text = tagAnons.InnerText.Trim();
 
+                string Content = "";
+                foreach (var item in tagContent.ChildNodes)
+                {
+                    if (item.Name == "#text")
+                    {
+                        Content += item.InnerText.Trim() + " ";
+                    }
+                }
                                 
                 var hydroList = NewsEntity.Models.Article.GetBySearch(Text);
                 if (hydroList.Count == 0)
                 {
                     var hydroArticle = new NewsEntity.Models.Article();
                     hydroArticle.Anons = Text;
-                    hydroArticle.Content = Text;
+                    hydroArticle.Content = Content;
                     hydroArticle.Published_At = DateTime.Now;
                     hydroArticle.Source_Published_At = DateTime.Now;
                     hydroArticle.Source_Site = "khabmeteo.ru";

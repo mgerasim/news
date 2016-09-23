@@ -43,6 +43,10 @@ namespace NewsServiceGrabber
                 theGrabberDvrcpod.Run();
                 IGrabber theGrabberKhabmeteoHydrology = new GrabberKhabmeteoHydrology(theLogger);
                 theGrabberKhabmeteoHydrology.Run();
+                IGrabber theGrabberKhabkrai = new GrabberKhabkrai(theLogger);
+                theGrabberKhabkrai.Run();
+                IGrabber theGrabberGeoStorm = new GrabberGeoStorm(theLogger);
+                theGrabberGeoStorm.Run();
             }
             catch (Exception ex)
             {
