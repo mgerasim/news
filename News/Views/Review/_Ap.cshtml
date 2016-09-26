@@ -1,0 +1,172 @@
+﻿@model NewsEntity.Models.GeospaceReview
+
+<div id="container" style="margin: 0 auto"></div>
+
+
+
+<script>
+
+    document.addEventListener("DOMContentLoaded", function(event) { 
+       
+        Highcharts.setOptions({
+            global: {
+                useUTC: true
+            },
+            lang: {
+                loading: 'Загрузка...',
+                months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+                weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+                shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
+                exportButtonTitle: "Экспорт",
+                printButtonTitle: "Печать",
+                rangeSelectorFrom: "С",
+                rangeSelectorTo: "По",
+                rangeSelectorZoom: "Период",
+                downloadPNG: 'Скачать PNG',
+                downloadJPEG: 'Скачать JPEG',
+                downloadPDF: 'Скачать PDF',
+                downloadSVG: 'Скачать SVG',
+                printChart: 'Напечатать график'
+            }
+        });
+
+
+        $('#container').highcharts({
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Состояние магнитного поля Земли за @Model.Date'
+            },
+            tooltip: {
+                formatter: function () {
+                    return Highcharts.dateFormat('%d.%m.%Y', new Date(this.x)) + '<br/>' + 'Ak: ' + this.y;
+                }
+            },
+            xAxis: {
+                type: "datetime",
+                tickInterval: 24 * 3600 * 1000,
+                labels: {
+                    align: 'center',
+                    style: {
+                        "color": 'black',
+                        "font-size": "9pt"
+                    },
+                    rotation: 'none'
+                },
+                dateTimeLabelFormats: { // don't display the dummy year
+                    day: '%e',
+                },
+                lineColor: 'black',
+                lineWidth: 1
+            },
+            yAxis: {
+                title: {
+                    text: 'Состояние магнитного поля Земли'
+                },
+                allowDecimals: true,
+                lineColor: 'black',
+
+                lineWidth: 1,
+                labels: {
+                    style: {
+                        "color": 'black',
+                        "font-size": "11pt"
+                    }
+                },
+                tickInterval: 10,
+                tickmarkPlacement: 'on',
+                min: 0,
+            },
+            legend: {
+                enabled: false
+            },
+
+            series: [{
+                name: 'Ak',
+                data: [
+                    @foreach (var item in Model.theListCodeUmagf)
+            {
+                DateTime dateAK = new DateTime(item.YYYY, item.MM, item.DD,12,0,0);
+                long ticks = (long)dateAK.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
+                string color = "red";
+                if (item.ak <= 14)
+                {
+                    color = "#00FF00";
+                }
+                if (14 < item.ak && item.ak <= 19)
+                {
+                    color = "yellow";
+                }
+                if (@item.ak == 0)
+                {
+                     <text>
+                    {x:@(ticks.ToString()), y:0.45, color: '@(color)'},
+                            </text>
+                }
+                else
+                {
+                    if(@item.ak == 1000)
+                    {
+                        <text>
+                            {x:@(ticks.ToString()), y:null, color: '@(color)'},
+                        </text>
+                    }
+                    else
+                    {
+                        <text>
+                            {x:@(ticks.ToString()), y:@item.ak, color: '@(color)'},
+                        </text>
+
+                    }
+                }
+            }
+    ],
+        dataLabels: {
+        enabled: true,
+        align: 'center',
+        format: '{point.y:,.0f}',
+        y:10
+        }
+    }],
+    plotOptions: {
+            series: {
+                pointRange: 24 * 3600 * 1000, // one day
+                pointPadding: 0,
+                groupPadding: 0,
+                shadow: false
+            }
+    }
+    });
+       
+
+
+    });
+
+
+</script>
+
+<br>
+<table border="1" cellpadding="7" cellspacing="1" width="100%">
+    <tbody>
+        <tr align="center">
+            <th align="left" width="20%"><span>Значения A<sub>p</sub></span></th>
+            <td width="13%"><span>0 - 7</span></td>
+            <td width="13%"><span>8 - 14</span></td>
+            <td width="13%"><span>15 - 19</span></td>
+            <td width="13%"><span>20 - 29</span></td>
+            <td width="13%"><span>30 - 49</span></td>
+            <td width="13%"><span>&gt;= 50</span></td>
+        </tr>
+        <tr align="center">
+            <th align="left"><span>Состояние<br />магнитного поля<br /> Земли</span></th>
+            <td bgcolor="#00FF00"><span>очень<br>спокойное</span></td>
+            <td bgcolor="#00FF00"><span>спокойное</span></td>
+            <td bgcolor="#FFFF00"><span>неустойчивое</span></td>
+            <td bgcolor="#FF0000"><span>слабо<br>возмущенное</span></td>
+            <td bgcolor="#FF0000"><span>умеренно<br>возмущенное</span></td>
+            <td bgcolor="#FF0000"><br><span>сильно<br>возмущенное<br><br></span></td>
+        </tr>
+    </tbody>
+</table>
+

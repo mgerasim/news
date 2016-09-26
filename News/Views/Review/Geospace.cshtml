@@ -7,6 +7,13 @@
     ViewBag.Title = "Геофизическая обстановка";
 }
 
+@section Scripts
+{
+    @Scripts.Render("~/Scripts/highcharts.js")
+}
+
+
+
 <main class="page-content">
 
     <section class="section-top-50">
@@ -31,6 +38,8 @@
                                 @Html.Raw(@Model.Content)
 
                                
+                                @Html.Partial("_Ap", @Model)
+
                             </div>
                         </div>
                      

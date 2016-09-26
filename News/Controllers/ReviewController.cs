@@ -35,7 +35,22 @@ namespace News.Controllers
 
         public ActionResult Geospace()
         {
+            
             var model = NewsEntity.Models.GeospaceReview.GetByLast();
+            try
+            {
+                model.LoadAp();
+            }
+            catch (Exception ex)
+            {
+                string err = ex.Message;
+                if (ex.InnerException != null)
+                {
+                    err += ": " + ex.InnerException.Message;
+                }
+                return RedirectToAction("Index", "Home", new { error = err, notice = "" });
+            }
+            
             return View(model);
         }
 

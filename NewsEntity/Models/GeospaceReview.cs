@@ -17,6 +17,7 @@ namespace NewsEntity.Models
         public virtual int YYYY { get; set; }
 
         public virtual string Text { get; set; }
+        public virtual List<CodeUmagf> theListCodeUmagf { get; set; }
 
         public GeospaceReview()
         {
@@ -27,6 +28,7 @@ namespace NewsEntity.Models
             MM = DateTime.Now.Month;
             YYYY = DateTime.Now.Year;
             Text = "";
+            this.theListCodeUmagf = new List<CodeUmagf>();
         }
 
         public virtual string Content
@@ -55,6 +57,7 @@ namespace NewsEntity.Models
             MM = month;
             YYYY = year;
             Text = text;
+            this.theListCodeUmagf = new List<CodeUmagf>();
         }
         public virtual void Save()
         {
@@ -96,6 +99,41 @@ namespace NewsEntity.Models
         public virtual void Send_SubdayReview()
         {
             throw new NotImplementedException();
+        }
+
+        public virtual string Date
+        {
+            get
+            {
+                return this.DD.ToString("00") + "." + this.MM.ToString("00") + "." + this.YYYY.ToString("0000");
+            }
+        }
+        public virtual void LoadAp()
+        {
+            int KhabarovskStation = 4;
+            DateTime currDate = DateTime.Now;
+            DateTime startDate = new DateTime(currDate.Year, currDate.Month, 1);
+            DateTime endDate = new DateTime(currDate.Year, currDate.Month, DateTime.DaysInMonth(currDate.Year, currDate.Month));
+            List<CodeUmagf> theUmagfList = (List<CodeUmagf>)CodeUmagf.GetByPeriod(KhabarovskStation, startDate, endDate);
+
+            
+            for (int i = 1; i <= endDate.Day; i++)
+            {
+                CodeUmagf theCode = null;
+                if (theUmagfList.Count(x => x.DD == i) > 0)
+                {
+                    theCode = theUmagfList.First(x => x.DD == i);
+                }
+                else
+                {
+                    theCode = new CodeUmagf();
+                    theCode.ak = 1000;
+                    theCode.DD = i;
+                    theCode.MM = currDate.Month;
+                    theCode.YYYY = currDate.Year;
+                }
+                this.theListCodeUmagf.Add(theCode);
+            }
         }
     }
 }

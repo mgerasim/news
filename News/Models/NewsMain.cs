@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NewsEntity.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -17,7 +18,7 @@ namespace News.Models
         public NewsEntity.Models.GeospaceReview theReviewGeospace;
         public string Error = "";
         public string S = "";
-
+        
         public NewsMain(bool isLoadCategory = true, string S = "")
         {
             if (isLoadCategory == true)
@@ -53,6 +54,7 @@ namespace News.Models
                 this.theReviewOperative = list.First();
             }
             this.theReviewGeospace = NewsEntity.Models.GeospaceReview.GetByLast();
+                        
             
         }
 

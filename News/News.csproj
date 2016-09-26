@@ -236,6 +236,7 @@
     <None Include="Properties\PublishProfiles\Release.pubxml" />
     <Content Include="images\ajax-loader.gif" />
     <Content Include="images\favicon.ico" />
+    <Content Include="images\geospace_logo.jpg" />
     <Content Include="images\ie8-panel\warning_bar_0000_us.jpg" />
     <Content Include="images\preloader.gif" />
     <Content Include="images\_blank.png" />
@@ -542,6 +543,7 @@
     <Content Include="Views\Review\Operative.cshtml" />
     <Content Include="Views\Windyty\Index.cshtml" />
     <Content Include="Views\Review\Geospace.cshtml" />
+    <Content Include="Views\Review\_Ap.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
