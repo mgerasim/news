@@ -49,6 +49,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -58,9 +60,90 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\MeteoService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Service References\MeteoService\HydroService.wsdl" />
+    <None Include="Service References\MeteoService\HydroService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MeteoService\HydroService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MeteoService\HydroService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MeteoService\HydroService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MeteoService\HydroService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MeteoService\NewsConsole.MeteoService.Category.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MeteoService\NewsConsole.MeteoService.ClimateInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MeteoService\NewsConsole.MeteoService.Criteria.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MeteoService\NewsConsole.MeteoService.CriteriaType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MeteoService\NewsConsole.MeteoService.Curve.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MeteoService\NewsConsole.MeteoService.DataSource.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MeteoService\NewsConsole.MeteoService.DataValue.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MeteoService\NewsConsole.MeteoService.DataValueCollection.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MeteoService\NewsConsole.MeteoService.GeoType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MeteoService\NewsConsole.MeteoService.Qualifier.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MeteoService\NewsConsole.MeteoService.SensorDifference.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MeteoService\NewsConsole.MeteoService.Site.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MeteoService\NewsConsole.MeteoService.SiteAttribute.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MeteoService\NewsConsole.MeteoService.SiteAttributeCollection.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MeteoService\NewsConsole.MeteoService.SiteAttributeType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MeteoService\NewsConsole.MeteoService.SiteGroupCollection.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MeteoService\NewsConsole.MeteoService.SiteTypeCollection.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MeteoService\NewsConsole.MeteoService.Variable.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MeteoService\NewsConsole.MeteoService.VariableCollection.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MeteoService\NewsConsole.MeteoService.WaterObjectCollection.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NewsCore\NewsCore.csproj">
@@ -88,6 +171,27 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\MeteoService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\MeteoService\HydroService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\MeteoService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\MeteoService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\MeteoService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

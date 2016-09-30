@@ -7,6 +7,49 @@
                 <!-- RD Navbar Top part-->
                 <div class="rd-navbar-top-part text-sm-left small">
                     <!-- RD Calendar--><span class="date veil reveal-sm-block rd-calendar">@DateTime.Now.ToLongDateString()</span>
+                    
+                    <div class="rd-navbar-top-part-right">                        
+                        @*<div class="divider-vertical divider-xs"></div>*@
+                        <div class="element-groups-sm-custom user-forms">
+                            @using News.Models;
+                            @{                                
+                                var Meteodata = new Meteodata();
+                            }
+                            <h3>Хабаровск</h3>
+                            <div class="divider-vertical divider-xs"></div>
+                            @if (Meteodata.Error.Length == 0)
+                            {
+                                <text>
+                                    сейчас
+                                </text>
+                                <h4>@Meteodata.Temperature<text>°</text> </h4>                                
+                                <div class="divider-vertical divider-xs"></div>
+                                <text>
+                                    ветер
+                                </text>
+    <i class="fa fa-long-arrow-down fa-lg fa-fw" style="transform: rotate(@(Meteodata.Wind)deg); -webkit-transform: rotate(@(Meteodata.Wind)deg); -o-transform: rotate(@(Meteodata.Wind)deg);"> </i>
+
+                                <h4>@Meteodata.WindSpeed</h4> <text>м/с &nbsp;   </text>@Meteodata.WindDirection
+                                <div class="divider-vertical divider-xs"></div>
+                                <em>
+                                    Время наблюдения: @Meteodata.Date.ToShortTimeString()
+                                </em>
+                            }
+                            @*<a href="#" data-rd-navbar-toggle=".rd-navbar-login" class="rd-navbar-login-btn"><span class="icon icon-sm fa-map-marker text-white veil-sm"></span><span class="veil reveal-sm-block"><h3>Хабаровск</h3></span></a>                            
+                            <div class="rd-navbar-login">
+                                <form action="#">
+                                    <div class="form-group">
+                                        <input type="text" name="name" placeholder="Your name" class="form-control">
+                                    </div>
+                                    <div class="form-group offset-top-12">
+                                        <input type="password" name="pass" placeholder="Your password" class="form-control">
+                                    </div>
+                                    <button type="submit" class="btn btn-warning offset-top-12 text-normal">Login</button>
+                                </form>
+                            </div>*@
+                        </div>
+                    </div>
+
                     <div class="rd-navbar-top-part-right">
                         <!-- RD Navbar Search-->
                         <div data-rd-navbar-toggle=".rd-navbar-search-wrap" class="rd-navbar-search-toggle"></div>
@@ -50,12 +93,14 @@
                         </div>*@
                     </div>
                 </div>
+                
                 <!-- RD Navbar Panel-->
                 <div class="rd-navbar-panel">
                     <!-- RD Navbar Toggle-->
                     <button data-rd-navbar-toggle=".rd-navbar-nav-wrap" class="rd-navbar-toggle"><span></span></button>
                     <!-- RD Navbar Brand-->
                     <div class="rd-navbar-brand"><a href="@Url.Action("Index","Home")" class="brand-name"><span>Метео </span>Портал</a></div>
+                    
                 </div>
                 @Html.Partial("_NavbarNews")
             </div>

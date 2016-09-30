@@ -18,13 +18,28 @@ namespace NewsConsole
             //SupportGrabberPrimpogodaWeatherNow();
            //SupportGrabberPrimpogodaLenta();
             //SupportGrabberDvrcpodLenta();
-            //SupportGrabberKhabmeteoHydrology();
+           // SupportGrabberKhabmeteoHydrology();
 //          SupportGrabberKhabkrai();
             //SupportGrabberGeoStorm();
-            SupportGeospace();
+            //SupportGeospace();
+            SupportMeteoService();
             Console.ReadKey();
         }
 
+        static void SupportMeteoService()
+        {
+            MeteoService.HydroServiceClient theMeteo = new MeteoService.HydroServiceClient();
+            
+            var SiteId = theMeteo.GetSite("31734", 1);
+            if (SiteId != null)
+            {
+                Console.WriteLine(SiteId.SiteId);
+                var VarTemp = theMeteo.GetDataValuesLocal(SiteId.SiteId, DateTime.UtcNow.AddHours(-1), DateTime.Now.AddHours(12), 5, null, null, 1);
+                Console.WriteLine(VarTemp.Last().Value + " - " + VarTemp.Last().Date.ToShortTimeString());
+
+
+            }
+        }
         static void SupportGeospace() 
         {
             NewsEntity.Models.GeospaceReview model = NewsEntity.Models.GeospaceReview.GetByLast();

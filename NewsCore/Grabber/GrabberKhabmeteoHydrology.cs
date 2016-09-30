@@ -46,6 +46,7 @@ namespace NewsCore.Grabber
                     throw new Exception("Не обнаружен тег div id=content");
                 }
 
+                
                 var tagAnons = tagContent.FirstChild;
                 if (tagAnons == null)
                 {
@@ -62,7 +63,7 @@ namespace NewsCore.Grabber
                     }
                 }
                                 
-                var hydroList = NewsEntity.Models.Article.GetBySearch(Text);
+                var hydroList = NewsEntity.Models.Article.GetBySearch(Content);
                 if (hydroList.Count == 0)
                 {
                     var hydroArticle = new NewsEntity.Models.Article();

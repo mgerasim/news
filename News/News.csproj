@@ -51,6 +51,8 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -142,9 +144,15 @@
     <Compile Include="Models\JsonNews.cs" />
     <Compile Include="Models\MediaNew.cs" />
     <Compile Include="Models\ArticleNew.cs" />
+    <Compile Include="Models\Meteodata.cs" />
     <Compile Include="Models\NewsMain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\ArticleController.cs" />
+    <Compile Include="Service References\MeteoService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\metro-colors.css" />
@@ -237,7 +245,9 @@
     <Content Include="images\ajax-loader.gif" />
     <Content Include="images\favicon.ico" />
     <Content Include="images\geospace_logo.jpg" />
+    <Content Include="images\hydrology_logo.png" />
     <Content Include="images\ie8-panel\warning_bar_0000_us.jpg" />
+    <Content Include="images\operative_logo.jpg" />
     <Content Include="images\preloader.gif" />
     <Content Include="images\_blank.png" />
     <Content Include="js\core.min.js" />
@@ -503,6 +513,73 @@
     <Content Include="Scripts\skins\moono\images\spinner.gif" />
     <Content Include="Scripts\styles.js" />
     <Content Include="Scripts\_references.js" />
+    <None Include="Service References\MeteoService\HydroService.disco" />
+    <None Include="Service References\MeteoService\configuration91.svcinfo" />
+    <None Include="Service References\MeteoService\configuration.svcinfo" />
+    <Content Include="Service References\MeteoService\News.MeteoService.Category.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\MeteoService\News.MeteoService.ClimateInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\MeteoService\News.MeteoService.Criteria.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\MeteoService\News.MeteoService.CriteriaType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\MeteoService\News.MeteoService.Curve.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\MeteoService\News.MeteoService.DataSource.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\MeteoService\News.MeteoService.DataValue.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\MeteoService\News.MeteoService.DataValueCollection.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\MeteoService\News.MeteoService.GeoType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\MeteoService\News.MeteoService.Qualifier.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\MeteoService\News.MeteoService.SensorDifference.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\MeteoService\News.MeteoService.Site.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\MeteoService\News.MeteoService.SiteAttribute.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\MeteoService\News.MeteoService.SiteAttributeCollection.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\MeteoService\News.MeteoService.SiteAttributeType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\MeteoService\News.MeteoService.SiteGroupCollection.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\MeteoService\News.MeteoService.SiteTypeCollection.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\MeteoService\News.MeteoService.Variable.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\MeteoService\News.MeteoService.VariableCollection.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\MeteoService\News.MeteoService.WaterObjectCollection.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Service References\MeteoService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -544,6 +621,22 @@
     <Content Include="Views\Windyty\Index.cshtml" />
     <Content Include="Views\Review\Geospace.cshtml" />
     <Content Include="Views\Review\_Ap.cshtml" />
+    <None Include="Service References\MeteoService\HydroService.wsdl" />
+    <None Include="Service References\MeteoService\HydroService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MeteoService\HydroService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MeteoService\HydroService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MeteoService\HydroService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MeteoService\HydroService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -556,6 +649,12 @@
       <Project>{ce60aa38-5fe4-4710-80cf-86feb6e7517e}</Project>
       <Name>NewsEntity</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\MeteoService\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
