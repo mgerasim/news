@@ -16,29 +16,29 @@ namespace NewsConsole
           //  SupportLogger();
             //SupportGrabber();
             //SupportGrabberPrimpogodaWeatherNow();
-           //SupportGrabberPrimpogodaLenta();
+           SupportGrabberPrimpogodaLenta();
             //SupportGrabberDvrcpodLenta();
            // SupportGrabberKhabmeteoHydrology();
 //          SupportGrabberKhabkrai();
             //SupportGrabberGeoStorm();
             //SupportGeospace();
-            SupportMeteoService();
+            //SupportMeteoService();
             Console.ReadKey();
         }
 
         static void SupportMeteoService()
         {
-            MeteoService.HydroServiceClient theMeteo = new MeteoService.HydroServiceClient();
+            //MeteoService.HydroServiceClient theMeteo = new MeteoService.HydroServiceClient();
             
-            var SiteId = theMeteo.GetSite("31734", 1);
-            if (SiteId != null)
-            {
-                Console.WriteLine(SiteId.SiteId);
-                var VarTemp = theMeteo.GetDataValuesLocal(SiteId.SiteId, DateTime.UtcNow.AddHours(-1), DateTime.Now.AddHours(12), 5, null, null, 1);
-                Console.WriteLine(VarTemp.Last().Value + " - " + VarTemp.Last().Date.ToShortTimeString());
+            //var SiteId = theMeteo.GetSite("31734", 1);
+            //if (SiteId != null)
+            //{
+            //    Console.WriteLine(SiteId.SiteId);
+            //    var VarTemp = theMeteo.GetDataValuesLocal(SiteId.SiteId, DateTime.UtcNow.AddHours(-1), DateTime.Now.AddHours(12), 5, null, null, 1);
+            //    Console.WriteLine(VarTemp.Last().Value + " - " + VarTemp.Last().Date.ToShortTimeString());
 
 
-            }
+            //}
         }
         static void SupportGeospace() 
         {
