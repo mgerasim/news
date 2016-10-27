@@ -65,7 +65,7 @@ namespace NewsEntity.Repositories
             using (ISession session = NHibernateHelper.OpenSession())
             {
                 ICriteria criteria = session.CreateCriteria(typeof(Article));
-                criteria.AddOrder(Order.Desc("ID"));
+                criteria.AddOrder(Order.Desc("Published_At"));
                 criteria.Add(Restrictions.IsNotNull("Published_At"));
                 return criteria.List<Article>().ToList<Article>();
             }
@@ -76,7 +76,7 @@ namespace NewsEntity.Repositories
             using (ISession session = NHibernateHelper.OpenSession())
             {
                 ICriteria criteria = session.CreateCriteria(typeof(Article));
-                criteria.AddOrder(Order.Desc("ID"));
+                criteria.AddOrder(Order.Desc("Published_At"));
                 criteria.Add(Restrictions.IsNotNull("Published_At"));
                 criteria.Add(Restrictions.Eq("Category", Category));
                 if (max > 0)

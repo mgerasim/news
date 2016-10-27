@@ -2,6 +2,7 @@
 using NewsCore.Grabber;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,10 +23,50 @@ namespace NewsConsole
 //          SupportGrabberKhabkrai();
             //SupportGrabberGeoStorm();
             //SupportGeospace();
-            SupportMeteoService();
+            //SupportMeteoService();
+            SupportParserWord();
             Console.ReadKey();
         }
 
+        static void SupportParserWord()
+        {
+            try
+            {
+                string fileDoc = @"\\192.168.72.116\обмен\ДФО.doc";
+                string fileName = System.IO.Path.GetTempPath() + Guid.NewGuid().ToString() + ".doc";
+
+                File.Copy(fileDoc, fileName);
+
+                Microsoft.Office.Interop.Word.Application theApp = new Microsoft.Office.Interop.Word.Application();
+                Microsoft.Office.Interop.Word.Document theDoc = theApp.Documents.Open(fileName);
+
+                int num = theDoc.Paragraphs.Count;
+
+                for(int i=1; i<num; i++)
+                {
+                    
+                    Console.WriteLine(theDoc.Paragraphs[i].Range.Text);
+                    Console.ReadKey();
+                }
+
+                theDoc.Close();
+                theApp.Quit();
+                
+                System.Runtime.InteropServices.Marshal.FinalReleaseComObject(theApp);
+
+                File.Delete(fileName);
+                
+            }
+            catch (Exception ex)
+            {
+                string err = ex.Message;
+                if (ex.InnerException != null)
+                {
+                    err += ex.InnerException.Message;
+                }
+                Console.WriteLine(err);
+            }
+        }
         static void SupportMeteoService()
         {
             MeteoService.HydroServiceClient theMeteo = new MeteoService.HydroServiceClient();

@@ -10,7 +10,7 @@
                     
                     <div class="rd-navbar-top-part-right">                        
                         @*<div class="divider-vertical divider-xs"></div>*@
-                        <div class="element-groups-sm-custom user-forms">
+                        <div class="element-groups-xs-custom user-forms hidden-xs hidden-sm">
                             @using News.Models;
                             @{                                
                                 var Meteodata = new Meteodata();
@@ -22,7 +22,7 @@
                                 <text>
                                     сейчас
                                 </text>
-                                <h4>@Meteodata.Temperature<text>°</text> </h4>                                
+                                <h4>@Meteodata.Temperature.ToString("0.0")<text>°</text> </h4>                                
                                 <div class="divider-vertical divider-xs"></div>
                                 <text>
                                     ветер
@@ -31,9 +31,9 @@
 
                                 <h4>@Meteodata.WindSpeed</h4> <text>м/с &nbsp;   </text>@Meteodata.WindDirection
                                 <div class="divider-vertical divider-xs"></div>
-                                <em>
+                                <div>
                                     Время наблюдения: @Meteodata.Date.ToShortTimeString()
-                                </em>
+                                </div>
                             }
                             @*<a href="#" data-rd-navbar-toggle=".rd-navbar-login" class="rd-navbar-login-btn"><span class="icon icon-sm fa-map-marker text-white veil-sm"></span><span class="veil reveal-sm-block"><h3>Хабаровск</h3></span></a>                            
                             <div class="rd-navbar-login">

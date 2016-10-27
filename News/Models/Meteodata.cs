@@ -18,7 +18,7 @@ namespace News.Models
             {
                 MeteoService.HydroServiceClient theMeteo = new MeteoService.HydroServiceClient();
 
-                var SiteId = theMeteo.GetSite("31734", 1);
+                var SiteId = theMeteo.GetSite("31721", 1);
                 if (SiteId != null)
                 {
                     var values = theMeteo.GetDataValuesLocal(SiteId.SiteId, DateTime.UtcNow.AddHours(-1), DateTime.Now.AddHours(12), 5, null, null, 1);

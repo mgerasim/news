@@ -241,6 +241,8 @@
     <Content Include="fonts\MaterialIcons-Regular.woff" />
     <Content Include="fonts\MaterialIcons-Regular.woff2" />
     <Content Include="css\style.css.map" />
+    <None Include="Properties\PublishProfiles\meteo - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\meteo - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\Release.pubxml" />
     <Content Include="images\ajax-loader.gif" />
     <Content Include="images\favicon.ico" />
