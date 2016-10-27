@@ -24,9 +24,10 @@ namespace NewsConsole
             //SupportGrabberGeoStorm();
             //SupportGeospace();
             //SupportMeteoService();
-
-//            SupportParserWord();
-
+<<<<<<< HEAD
+            SupportParserWord();
+=======
+>>>>>>> a92398f67acd781b47fa2eade45d9ee6921e2992
             Console.ReadKey();
         }
 

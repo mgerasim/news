@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HtmlAgilityPack;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -56,6 +57,13 @@ namespace NewsCore.Grabber
                     HtmlAgilityPack.HtmlNode.ElementsFlags["br"] = HtmlAgilityPack.HtmlElementFlag.Empty;
                     doc.LoadHtml(data);
 
+                    foreach (HtmlNode a in doc.DocumentNode.SelectNodes("//a[@href]"))
+                    {
+
+                            var TextTag = HtmlNode.CreateNode(a.InnerText);
+                            a.ParentNode.ReplaceChild(TextTag, a);  
+                    }
+
                     string xpathDivSelector = "//div[@class='news-detail']";
                     var tagNewsDetail = doc.DocumentNode.SelectSingleNode(xpathDivSelector);
                     if (tagNewsDetail == null)
@@ -74,7 +82,7 @@ namespace NewsCore.Grabber
                     }
 
                     var tagList = tagNewsDetail.SelectNodes("//p");
-                    int MaxAnons = 2;
+                    int MaxAnons = 1;
                     int indexAnons = 0;
                     string newsAnons = "";
                     foreach (var p in tagList)
@@ -86,6 +94,12 @@ namespace NewsCore.Grabber
                         }
                     }
 
+                    //var query = tagNewsDetail.Descendants("a");
+                    //foreach (var a in query.ToList())
+                    //{
+                    //    var TextTag = HtmlNode.CreateNode(a.InnerText);
+                    //    a.ParentNode.ReplaceChild(TextTag, a);  
+                    //}
 
                     var tagH6Date = tagNewsDetail.SelectSingleNode("//h6[@class='date']");
                     if (tagH6Date == null)
