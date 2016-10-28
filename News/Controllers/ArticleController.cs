@@ -146,7 +146,10 @@ namespace News.Views
                 var model = new NewsEntity.Models.Article();
                 model.Content = collection.Get("Content");
                 model.Title = collection.Get("Title");
-                model.Anons = collection.Get("Anons");                
+                model.Anons = collection.Get("Anons");
+                model.Keywords = collection.Get("Keywords");
+                model.Author = collection.Get("Author");
+                model.Displayed_Days = Convert.ToInt16(collection.Get("Displayed_Days"));
                 model.Published_At = null;
                 model.Source_Url = Guid.NewGuid().ToString();
                 model.Category = Convert.ToInt32(collection.Get("Category"));
@@ -188,7 +191,10 @@ namespace News.Views
                 model.Content = collection.Get("Content");
                 model.Title = collection.Get("Title");
                 model.Anons = collection.Get("Anons");
+                model.Keywords = collection.Get("Keywords");
+                model.Author = collection.Get("Author");
                 model.Category = Convert.ToInt32(collection.Get("Category"));
+                model.Displayed_Days = Convert.ToInt16(collection.Get("Displayed_Days"));
                 model.Update();
                 return RedirectToAction("Index");
             }

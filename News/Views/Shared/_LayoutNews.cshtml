@@ -3,6 +3,14 @@
 <head>
     <!-- Site Title-->
     <title>@ViewBag.Title</title>
+    @if (ViewBag.Keywords != null)
+    {
+        <meta name="keywords" content="@ViewBag.Keywords">
+    }
+    @if (ViewBag.Author != null)
+    {
+        <meta name="author" content="@ViewBag.Author">
+    }
     <meta name="format-detection" content="telephone=no">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">

@@ -262,6 +262,7 @@
     <Content Include="Scripts\config.js" />
     <Content Include="Scripts\contents.css" />
     <Content Include="Scripts\core.min.js" />
+    <Content Include="Scripts\highcharts.js" />
     <Content Include="Scripts\html5shiv.min.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />

@@ -23,13 +23,11 @@ namespace News.Models
         {
             if (isLoadCategory == true)
             {
-                int recent_days = 3;
-                int max_news = 3;
-                this.theArticleOfKhabarovsk = NewsEntity.Models.Article.GetByCategory(1, 0, max_news, recent_days);
-                this.theArticleOfRegion = NewsEntity.Models.Article.GetByCategory(2, 0, max_news, recent_days);
-                this.theArticleOfRussia = NewsEntity.Models.Article.GetByCategory(3, 0, max_news, recent_days);
-                this.theArticleOfWorld = NewsEntity.Models.Article.GetByCategory(4, 0, max_news, recent_days);
-                this.theArticleOfOther = NewsEntity.Models.Article.GetByCategory(999, 0, max_news, recent_days);
+                this.theArticleOfKhabarovsk = NewsEntity.Models.Article.GetDisplayed(1);
+                this.theArticleOfRegion = NewsEntity.Models.Article.GetDisplayed(2);
+                this.theArticleOfRussia = NewsEntity.Models.Article.GetDisplayed(3);
+                this.theArticleOfWorld = NewsEntity.Models.Article.GetDisplayed(4);
+                this.theArticleOfOther = NewsEntity.Models.Article.GetDisplayed(999);
             }
             if (S != "")
             {

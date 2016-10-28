@@ -82,6 +82,45 @@
 
 
         <div class="row">
+            <div class="offset10">
+                <label class="block">Время отображения:</label>
+
+                <select name="Displayed_Days">                    
+                    <option value="1">1 день</option>
+                    <option value="3" selected>3 дня</option>
+                    <option value="7">1 неделя</option>
+                    <option value="12">2 недели</option>
+                    <option value="1">1 месяц</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="offset10">
+                <label class="block">Ключевые слова:</label>
+
+                <div class="input-control textarea">
+                    @Html.TextAreaFor(model => model.Keywords, new { id = "Article_Keywords" })
+
+                </div>
+                @Html.ValidationMessageFor(model => model.Keywords)
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="offset10">
+                <label class="block">Автор:</label>
+
+                <div class="input-control textarea">
+                    @Html.TextAreaFor(model => model.Author, new { id = "Article_Author" })
+
+                </div>
+                @Html.ValidationMessageFor(model => model.Author)
+            </div>
+        </div>
+
+
+        <div class="row">
             <button type="submit" class="button primary">Сохранить</button>
         </div>
 

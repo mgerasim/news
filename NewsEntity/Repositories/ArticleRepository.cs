@@ -91,6 +91,22 @@ namespace NewsEntity.Repositories
                 return criteria.List<Article>().ToList<Article>();
             }
         }
+
+        public List<Article> GetDisplayed(int Category)
+        {
+            using (ISession session = NHibernateHelper.OpenSession())
+            {
+                ICriteria criteria = session.CreateCriteria(typeof(Article));
+                criteria.AddOrder(Order.Desc("Published_At"));
+                criteria.Add(Restrictions.IsNotNull("Published_At"));
+                criteria.Add(Restrictions.Eq("Category", Category));              
+                
+
+                criteria.Add(Restrictions.Ge("Displayed_At", DateTime.Now));
+                
+                return criteria.List<Article>().ToList<Article>();
+            }
+        }
         public List<Article> GetBySearch(string S)
         {
             using (ISession session = NHibernateHelper.OpenSession())

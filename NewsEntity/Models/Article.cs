@@ -44,8 +44,13 @@ namespace NewsEntity.Models
         public virtual DateTime? Source_Published_At { get; set; }
         public virtual string Title { get; set; }
         public virtual DateTime? Published_At { get; set; }
-
+        public virtual int Displayed_Days { get; set; }
+        public virtual DateTime? Displayed_At { get; set; }
         public virtual int Category { get; set; }
+
+        public virtual string Keywords { get; set; }
+
+        public virtual string Author { get; set; }
 
         public Article()
         {
@@ -59,6 +64,11 @@ namespace NewsEntity.Models
             this.created_at = DateTime.Now;
             this.updated_at = DateTime.Now;
             Common.IRepository<Article> repo = new Repositories.ArticleRepository();
+
+            if (this.Published_At.HasValue == true)
+            {
+                this.Displayed_At = (DateTime) this.Published_At.Value.AddDays(this.Displayed_Days);
+            }
 
             repo.Save(this);
 
@@ -75,6 +85,12 @@ namespace NewsEntity.Models
         {
             this.updated_at = DateTime.Now;
             Common.IRepository<Article> repo = new Repositories.ArticleRepository();
+
+            if (this.Published_At.HasValue == true)
+            {
+                this.Displayed_At = (DateTime)this.Published_At.Value.AddDays(this.Displayed_Days);
+            }
+
             repo.Update(this);
         }
 
@@ -104,6 +120,13 @@ namespace NewsEntity.Models
             NewsEntity.Repositories.ArticleRepository repo = new Repositories.ArticleRepository();
             return repo.GetByCategory(Category, offset, max, recent_days);
         }
+
+        public static List<Article> GetDisplayed(int Category)
+        {
+            NewsEntity.Repositories.ArticleRepository repo = new Repositories.ArticleRepository();
+            return repo.GetDisplayed(Category);
+        }
+
         public static List<Article> GetBySearch(string S)
         {
             NewsEntity.Repositories.ArticleRepository repo = new Repositories.ArticleRepository();

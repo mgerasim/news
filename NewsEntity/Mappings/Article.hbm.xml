@@ -16,7 +16,11 @@
     <property name="Title" not-null="true" type="string" length="200"/>
     <property name="Anons"  not-null="true" type="string" length="10000"/>
     <property name="Published_At" />
+    <property name="Displayed_Days" />
+    <property name="Displayed_At" />
     <property name="Category"  not-null="true"/>
+    <property name="Keywords" type="string" length="200"/>
+    <property name="Author" type="string" length="200"/>
 
   </class>
 </hibernate-mapping>

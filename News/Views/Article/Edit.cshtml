@@ -90,6 +90,86 @@
             </div>
 
             <div class="row">
+                <div class="offset10">
+                    <label class="block">Время отображения:</label>
+
+                    <select name="Displayed_Days">
+                        @if (Model.Displayed_Days == 1)
+                        {
+                            <option value="1" selected>1 день</option>    
+                        }
+                        else
+                        {
+                            <option value="1">1 день</option>    
+                        }
+                        
+                        @if (Model.Displayed_Days == 3)
+                        {
+                            <option value="3" selected>3 дня</option>
+                        }
+                        else
+                        {
+                            <option value="3">3 дня</option>
+                        }
+                        
+                        @if (Model.Displayed_Days == 7)
+                        {
+                            <option value="7" selected>1 неделя</option>
+                        }
+                        else
+                        {
+                            <option value="7">1 неделя</option>
+                        }
+                        
+                        @if (Model.Displayed_Days == 14)
+                        {
+                            <option value="14" selected>2 недели</option>
+                        }
+                        else
+                        {
+                            <option value="14">2 недели</option>
+                        }
+                        
+                        
+                        @if (Model.Displayed_Days == 30)
+                        {
+                            <option value="30" selected>1 месяц</option>
+                        }
+                        else
+                        {
+                            <option value="30">1 месяц</option>                            
+                        }
+                        
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="offset10">
+                    <label class="block">Ключевые слова:</label>
+
+                    <div class="input-control textarea">
+                        @Html.TextAreaFor(model => model.Keywords, new { id = "Article_Keywords" })
+
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Keywords)
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="offset10">
+                    <label class="block">Автор:</label>
+
+                    <div class="input-control textarea">
+                        @Html.TextAreaFor(model => model.Author, new { id = "Article_Author" })
+
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Author)
+                </div>
+            </div>
+
+            <div class="row">
                 <button type="submit" class="button primary">Сохранить</button>
             </div>
 

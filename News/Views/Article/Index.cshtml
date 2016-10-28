@@ -58,7 +58,8 @@
                         @item.ID
                     </td>
                     <td>
-                        @item.Title
+                        @Html.ActionLink(@item.Title, "Edit", new { id = item.ID })
+                        
                     </td>
 
                     <td>
