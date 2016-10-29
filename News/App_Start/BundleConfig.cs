@@ -61,6 +61,26 @@ namespace News
                         "~/Content/themes/base/jquery.ui.datepicker.css",
                         "~/Content/themes/base/jquery.ui.progressbar.css",
                         "~/Content/themes/base/jquery.ui.theme.css"));
+
+            bundles.Add(new StyleBundle("~/Content/datepicker").Include(
+                      "~/Content/bootstrap-datepicker.css",
+                      "~/Content/bootstrap-datepicker3.css"));
+
+
+            bundles.Add(new StyleBundle("~/Content/selectpicker").Include(
+                         "~/Content/bootstrap-select.css")
+                         );
+
+
+
+            bundles.Add(new ScriptBundle("~/bundles/datepicker").Include(
+                        "~/Scripts/bootstrap-datepicker.js",
+                        "~/Scripts/locales/bootstrap-datepicker.ru.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/selectpicker").Include(
+                        "~/Scripts/bootstrap-select.js"));
+
+
         }
     }
 }

@@ -9,6 +9,20 @@
 
 <script src="~/Scripts/ckeditor.js"></script>
 
+@section Scripts
+{
+    @Scripts.Render("~/bundles/datepicker")
+@Scripts.Render("~/Scripts/locales/bootstrap-datepicker.ru.min.js");
+    
+}
+
+@section Styles
+{
+    <link id="bs-css" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    @Styles.Render("~/Content/datepicker")
+}
+
+
 <div class="cell auto-size padding20 bg-white" id="cell-content">
     <h1 class="text-light">Редактирование новости <span class="mif-file-text place-right"></span></h1>
     <hr class="thin bg-grayLighter">
@@ -167,6 +181,71 @@
                     </div>
                     @Html.ValidationMessageFor(model => model.Author)
                 </div>
+            </div>
+
+
+            <div class="row">
+                <div class="offset10">
+                    <label class="block">Опубликовать:</label>
+
+@if (@Model.Published_At.HasValue == true)
+                    {
+
+                    <div class="input-control textarea">
+                        <input type="checkbox" name="isPublished" checked>
+                    </div>
+}
+else
+{
+                    <div class="input-control textarea">
+                        <input type="checkbox" name="isPublished">
+                    </div>
+    
+}
+                    
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="offset10">
+                    <label class="block">Дата публикации:</label>
+
+                    @if (@Model.Published_At.HasValue == true)
+                    {
+                     
+                    <div id="calendar" class="input-group date">
+                        <span class="input-group-addon">Дата: </span>
+                        <input id="datevalue" name="Published_At" type="text" data-date-format="dd.mm.yyyy" value="@Model.Published_At.Value.ToString("dd.MM.yyyy")" class="form-control">
+                    </div>   
+                    }
+                    else
+                    {
+                    <div id="calendar" class="input-group date">
+                        <span class="input-group-addon">Дата: </span>
+                        <input id="datevalue" name="Published_At" type="text" data-date-format="dd.mm.yyyy" value="@DateTime.Now.ToString("dd.MM.yyyy")" class="form-control">
+                    </div>   
+                        
+                    }
+                    
+
+                    <script>
+                        $(document).ready(function () {
+
+
+                            $('#calendar').datepicker({
+                                todayBtn: true,
+                                autoclose: true,
+                                todayHighlight: false,
+                                format: 'dd.mm.yyyy',
+                                language: "ru"
+                            });
+                        });
+                    </script>
+                   
+                </div>
+
+
+
             </div>
 
             <div class="row">

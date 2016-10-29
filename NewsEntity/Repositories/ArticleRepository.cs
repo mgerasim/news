@@ -99,9 +99,10 @@ namespace NewsEntity.Repositories
                 ICriteria criteria = session.CreateCriteria(typeof(Article));
                 criteria.AddOrder(Order.Desc("Published_At"));
                 criteria.Add(Restrictions.IsNotNull("Published_At"));
-                criteria.Add(Restrictions.Eq("Category", Category));              
-                
+                criteria.Add(Restrictions.Eq("Category", Category));
 
+
+                criteria.Add(Restrictions.Le("Published_At", DateTime.Now));
                 criteria.Add(Restrictions.Ge("Displayed_At", DateTime.Now));
                 
                 return criteria.List<Article>().ToList<Article>();

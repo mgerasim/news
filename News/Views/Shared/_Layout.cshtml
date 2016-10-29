@@ -4,11 +4,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
+    @RenderSection("styles", required: false)
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/metro")
     @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/metro")
-    
+    @Scripts.Render("~/bundles/metro")    
+    @RenderSection("scripts", required: false)
 </head>
 <body class="bg-steel">
     <div class="app-bar fixed-top darcula" data-role="appbar">
@@ -24,6 +25,6 @@
         </div>
 
     
-    @RenderSection("scripts", required: false)
+    
 </body>
 </html>

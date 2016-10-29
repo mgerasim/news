@@ -195,6 +195,16 @@ namespace News.Views
                 model.Author = collection.Get("Author");
                 model.Category = Convert.ToInt32(collection.Get("Category"));
                 model.Displayed_Days = Convert.ToInt16(collection.Get("Displayed_Days"));
+
+                if (collection.Get("isPublished") == "on" )
+                {
+                    model.Published_At = DateTime.Parse(collection.Get("Published_At"));
+                }
+                else
+                {
+                    model.Published_At = null;
+                }
+
                 model.Update();
                 return RedirectToAction("Index");
             }
